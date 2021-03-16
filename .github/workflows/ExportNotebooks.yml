@@ -16,7 +16,7 @@ jobs:
               uses: actions/cache@v2
               with:
                 path: pluto_state_cache
-                key: ${{ runner.os }}-pluto_state_cache-v1-${{ hashFiles('**/Project.toml', '**/Manifest.toml') }}
+                key: ${{ runner.os }}-pluto_state_cache-v2-${{ hashFiles('**/Project.toml', '**/Manifest.toml') }}
 
             - name: Install Julia
               uses: julia-actions/setup-julia@v1
