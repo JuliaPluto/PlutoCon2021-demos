@@ -12,3 +12,11 @@ You can either:
 2. open a Pull Request to this repository, adding your notebook.
 
 Be sure to write your name and an introduction inside the notebook. Use <code>@bind</code> to make your notebook interactive!
+
+## What version of Julia and Pluto?
+We will use Julia 1.6, and the latest development branch of Pluto (version 0.14 or 0.15). Note that Pluto is always backwards compatible, so if it works, it works!
+
+Try not to use more than 2GB of memory.
+
+## Which packages will be installed?
+If you have done this before, write a [pkg cell](https://github.com/fonsp/pluto-static-render-test#julia-packages). If not, don't worry about packages too much, **we will help you set it up correctly**!
