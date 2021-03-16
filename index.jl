@@ -101,7 +101,7 @@ $(map(notebookfiles) do path
 		path * ".html"
 	end
 	
-	"<li><a href=\"$(html_filename)\">$(html_filename)</a></li>"
+"<li><a href=\"$(html_filename)\">$(html_filename[1:end-5])</a></li>"
 end |> join
 )
 </ul>
