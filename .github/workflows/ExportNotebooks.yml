@@ -1,0 +1,32 @@
+name: Export Pluto notebooks
+on:
+    push:
+        branches:
+            - main
+    workflow_dispatch:
+
+jobs:
+    build-and-deploy:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v2
+
+            - name: Install Julia
+              uses: julia-actions/setup-julia@v1
+              with:
+                  version: 1.6.0-rc1
+            - name: Run Pluto notebooks
+              run: julia --project=pluto-deployment-environment -e '
+                  import Pkg;
+                  Pkg.instantiate();
+
+                  import PlutoUtils;
+
+                  PlutoUtils.Export.github_action(; export_dir=".",  baked_state=false,offer_binder=true, binder_url="https://mybinder.org/build/gh/fonsp/pluto-on-binder/0942ebd", bind_server_url="https://plutocon2021-demos-sliderserver.plutojl.org/");'
+            - name: Deploy to gh-pages
+              uses: JamesIves/github-pages-deploy-action@releases/v3
+              with:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  BRANCH: gh-pages
+                  FOLDER: .
