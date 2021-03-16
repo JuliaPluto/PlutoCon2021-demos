@@ -12,6 +12,12 @@ jobs:
             - name: Checkout
               uses: actions/checkout@v2
 
+            - name: Set up notebook state cache
+              uses: actions/cache@v2
+              with:
+                path: pluto_state_cache
+                key: ${{ runner.os }}-pluto_state_cache-v1-${{ hashFiles('**/Project.toml', '**/Manifest.toml') }}
+
             - name: Install Julia
               uses: julia-actions/setup-julia@v1
               with:
@@ -23,7 +29,7 @@ jobs:
 
                   import PlutoUtils;
 
-                  PlutoUtils.Export.github_action(; export_dir=".",  baked_state=false,offer_binder=true, binder_url="https://mybinder.org/build/gh/fonsp/pluto-on-binder/0942ebd", bind_server_url="https://plutocon2021-demos-sliderserver.plutojl.org/");'
+                  PlutoUtils.Export.github_action(; export_dir=".", cache_dir="pluto_state_cache", baked_state=false,offer_binder=true, binder_url="https://mybinder.org/build/gh/fonsp/pluto-on-binder/0942ebd", bind_server_url="https://plutocon2021-demos-sliderserver.plutojl.org/");'
             - name: Deploy to gh-pages
               uses: JamesIves/github-pages-deploy-action@releases/v3
               with:
