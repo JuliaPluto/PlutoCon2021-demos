@@ -16,20 +16,25 @@ jobs:
               uses: actions/cache@v2
               with:
                 path: pluto_state_cache
-                key: ${{ runner.os }}-pluto_state_cache-v2-${{ hashFiles('**/Project.toml', '**/Manifest.toml') }}
+                key: ${{ runner.os }}-pluto_state_cache-v2-${{ hashFiles('**/Project.toml', '**/Manifest.toml') }}-${{ hashFiles('**/*.jl') }}
+                restore-keys: |
+                    ${{ runner.os }}-pluto_state_cache-v2-${{ hashFiles('**/Project.toml', '**/Manifest.toml') }}
 
             - name: Install Julia
               uses: julia-actions/setup-julia@v1
               with:
-                  version: 1.6.0-rc1
+                  version: 1.6.0-rc3
+
             - name: Run Pluto notebooks
               run: julia --project=pluto-deployment-environment -e '
                   import Pkg;
                   Pkg.instantiate();
 
-                  import PlutoUtils;
+                  import PlutoSliderServer;
 
-                  PlutoUtils.Export.github_action(; export_dir=".", cache_dir="pluto_state_cache", baked_state=false,offer_binder=true, binder_url="https://mybinder.org/build/gh/fonsp/pluto-on-binder/0942ebd", bind_server_url="https://plutocon2021-demos-sliderserver.plutojl.org/");'
+                  PlutoSliderServer.github_action(; 
+                    Export_cache_dir="pluto_state_cache",
+                  );'
             - name: Deploy to gh-pages
               uses: JamesIves/github-pages-deploy-action@releases/v3
               with:

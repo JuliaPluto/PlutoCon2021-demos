@@ -153,37 +153,29 @@ version = "1.4.0"
 
 [[Parsers]]
 deps = ["Dates"]
-git-tree-sha1 = "223a825cccef2228f3fdbf2ecc7ca93363059073"
+git-tree-sha1 = "c8abc88faa3f7a3950832ac5d6e690881590d6dc"
 uuid = "69de0a69-1ddd-5017-9359-2bf0b02dc9f0"
-version = "1.0.16"
+version = "1.1.0"
 
 [[Pkg]]
-deps = ["Artifacts", "Dates", "Downloads", "LibGit2", "Libdl", "Logging", "Markdown", "Printf", "REPL", "Random", "SHA", "Serialization", "TOML", "Tar", "UUIDs"]
+deps = ["Artifacts", "Dates", "Downloads", "LibGit2", "Libdl", "Logging", "Markdown", "Printf", "REPL", "Random", "SHA", "Serialization", "TOML", "Tar", "UUIDs", "p7zip_jll"]
 uuid = "44cfe95a-1eb2-52ea-b672-e2afdf69b78f"
 
 [[Pluto]]
 deps = ["Base64", "Dates", "Distributed", "FuzzyCompletions", "HTTP", "InteractiveUtils", "Logging", "Markdown", "MsgPack", "Pkg", "REPL", "Sockets", "TableIOInterface", "Tables", "UUIDs"]
-git-tree-sha1 = "1b1f8760d13806c96bd34392e581553118717fc1"
-repo-rev = "7b944bc"
+git-tree-sha1 = "a22ee6b189b1c4abc38ef5fa5e884622efb8f5d8"
+repo-rev = "5e2ec5f"
 repo-url = "https://github.com/fonsp/Pluto.jl"
 uuid = "c3e4b0f8-55cb-11ea-2926-15256bba5781"
-version = "0.15.0"
+version = "0.14.0"
 
 [[PlutoSliderServer]]
-deps = ["Base64", "Configurations", "HTTP", "Pkg", "Pluto", "SHA", "Sockets", "TOML", "UUIDs"]
-git-tree-sha1 = "019b75b46dc113cc29105a1e7e7b4c9695ad6a02"
-repo-rev = "2602ce5"
+deps = ["Base64", "Configurations", "GitHubActions", "HTTP", "Logging", "Pkg", "Pluto", "SHA", "Sockets", "TOML", "UUIDs"]
+git-tree-sha1 = "4ca07518b6ea68acbcfc9ba60c5125af18f53390"
+repo-rev = "9f1c51e"
 repo-url = "https://github.com/JuliaPluto/PlutoSliderServer.jl"
 uuid = "2fc8631c-6f24-4c5b-bca7-cbb509c42db4"
-version = "0.1.0"
-
-[[PlutoUtils]]
-deps = ["Base64", "GitHubActions", "HTTP", "Logging", "Pkg", "Pluto", "SHA", "Sockets"]
-git-tree-sha1 = "64642b321d59f48afc38c5a1bf6bb3117647d4d1"
-repo-rev = "8d361b9"
-repo-url = "https://github.com/fonsp/PlutoUtils.jl"
-uuid = "a5ec66cb-57bb-4ae5-9259-3342d9ed6c94"
-version = "0.1.0"
+version = "0.2.0"
 
 [[Printf]]
 deps = ["Unicode"]
@@ -254,3 +246,7 @@ uuid = "83775a58-1f1d-513f-b197-d71354ab007a"
 [[nghttp2_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "8e850ede-7688-5339-a07c-302acd2aaf8d"
+
+[[p7zip_jll]]
+deps = ["Artifacts", "Libdl"]
+uuid = "3f19e933-33d8-53b3-aaab-bd5110c3b7a0"
