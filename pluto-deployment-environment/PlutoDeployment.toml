@@ -1,3 +1,12 @@
+[Export]
+baked_state = false
+offer_binder = true
+binder_url = "https://mybinder.org/build/gh/fonsp/pluto-on-binder/0942ebd"
+slider_server_url = "https://plutocon2021-demos-sliderserver.plutojl.org/"
+ignore_cache = [
+    "index.jl",
+]
+
 [SliderServer]
 exclude=[
     "index.jl",
