@@ -11,17 +11,12 @@
     <meta name="author" content="Fons van der Plas; Mikołaj Bochenski" />
     <link rel="license" href="https://github.com/fonsp/Pluto.jl/blob/main/LICENSE" />
     <meta name="theme-color" content="#ffffff" />
-    <link rel="icon" type="image/png" sizes="16x16" href="https://cdn.jsdelivr.net/gh/fonsp/Pluto.jl@5070c3b/frontend/img/favicon-16x16.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="https://cdn.jsdelivr.net/gh/fonsp/Pluto.jl@5070c3b/frontend/img/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="96x96" href="https://cdn.jsdelivr.net/gh/fonsp/Pluto.jl@5070c3b/frontend/img/favicon-96x96.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="96x96" href="img/favicon-96x96.png" />
     <meta name="description" content="Pluto.jl notebooks" />
-    <link rel="pluto-logo-big" href="https://cdn.jsdelivr.net/gh/fonsp/Pluto.jl@5070c3b/frontend/img/logo.svg" />
-    <link rel="pluto-logo-small" href="https://cdn.jsdelivr.net/gh/fonsp/Pluto.jl@5070c3b/frontend/img/favicon_unsaturated.svg" />
 
-    <link rel="pluto-sw" href="https://cdn.jsdelivr.net/gh/fonsp/Pluto.jl@5070c3b/frontend/sw.js" />
-    <script>
-        navigator.serviceWorker?.register(document.head.querySelector("link[rel='pluto-sw']").getAttribute("href"), { scope: "./" }).catch(console.warn)
-    </script>
+    <script src="common/RegisterSW.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.20/lodash.min.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/@observablehq/stdlib@3.3.1/dist/stdlib.js" defer></script>
@@ -39,29 +34,18 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.58.1/lib/codemirror.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.58.1/addon/hint/show-hint.min.css" />
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fonsp/Pluto.jl@5070c3b/frontend/editor.css" type="text/css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fonsp/Pluto.jl@5070c3b/frontend/treeview.css" type="text/css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fonsp/Pluto.jl@5070c3b/frontend/hide-ui.css" type="text/css" media="all" data-pluto-file="hide-ui">
-    <!-- The instant feedback form at the bottom of the page uses Google Firestore to save feedback and statistics. We DO NOT use Google Analytics, and NO DATA is sent except for data entered in the feedback form and anonymous statistics. See /statistics-info for more details. -->
+    <link rel="stylesheet" href="editor.css" type="text/css" />
+    <link rel="stylesheet" href="treeview.css" type="text/css" />
+    <link rel="stylesheet" href="hide-ui.css" type="text/css" media="print" />
+    <!-- The instant feedback form at the bottom of the page uses Google Firestore to save feedback. -->
     <script src="https://cdn.jsdelivr.net/npm/firebase@7.13.1/firebase-app.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/firebase@7.13.1/firebase-firestore.js" defer></script>
 
-    <script data-pluto-file="launch-parameters">
-window.pluto_notebookfile = "fonsp — Plots.jl click input.jl"
-window.pluto_disable_ui = true
-window.pluto_statefile = "fonsp — Plots.jl click input.plutostate"
-window.pluto_slider_server_url = "https://plutocon2021-demos-sliderserver.plutojl.org/"
-window.pluto_binder_url = "https://mybinder.org/build/gh/fonsp/pluto-on-binder/8345c9238da98fe56f3d0ee20200314769a7d893/"
-</script>
-<!-- [automatically generated launch parameters can be inserted here] -->
+    <script src="editor.js" type="module" defer></script>
+    <script src="warn_old_browsers.js"></script>
 
-
-    <script src="https://cdn.jsdelivr.net/gh/fonsp/Pluto.jl@5070c3b/frontend/editor.js" type="module" defer></script>
-    <script src="https://cdn.jsdelivr.net/gh/fonsp/Pluto.jl@5070c3b/frontend/warn_old_browsers.js"></script>
-
-    <script src="https://cdn.jsdelivr.net/gh/fonsp/Pluto.jl@5070c3b/frontend/common/SetupMathJax.js"></script>
+    <script src="common/SetupMathJax.js"></script>
     <script type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-svg-full.js" async></script>
-
 </head>
 
 <body class="loading no-MαθJax"></body>
