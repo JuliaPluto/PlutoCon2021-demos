@@ -1,8 +1,17 @@
 ### A Pluto.jl notebook ###
-# v0.15.0
+# v0.14.0
 
 using Markdown
 using InteractiveUtils
+
+# This Pluto notebook uses @bind for interactivity. When running this notebook outside of Pluto, the following 'mock version' of @bind gives bound variables a default value (instead of an error).
+macro bind(def, element)
+    quote
+        local el = $(esc(element))
+        global $(esc(def)) = Core.applicable(Base.get, el) ? Base.get(el) : missing
+        el
+    end
+end
 
 # ╔═╡ c09023be-e4a3-4969-a938-6a9d46008c4b
 html"""
@@ -47,6 +56,41 @@ overflow-x: hidden;
 </style>
 """
 
+# ╔═╡ c6e22e1b-759f-4eca-b3c6-2d16b133c79d
+md"""
+Welcome to the PlutoCon demo page! The notebooks on this site were submitted by Pluto users, and you can view them in your browser. Just like the website [computationalthinking.mit.edu](computationalthinking.mit.edu), we will use our [fancy new technology](https://github.com/JuliaPluto/PlutoSliderServer.jl) to run sliders, button, webcam inputs, etc. directly on the website.
+"""
+
+# ╔═╡ 03869e11-5785-4b05-b830-64e25aa66dc6
+
+
+# ╔═╡ 92fa5931-5ac5-4358-a141-210f73806925
+md"""
+## Notebooks
+"""
+
+# ╔═╡ a5d4e8bc-75b6-40c9-81cd-220f41d16261
+
+
+# ╔═╡ 29507706-e205-4c14-8535-b56955093f2f
+
+
+# ╔═╡ 5fc9f211-1519-4843-a3e5-3bf2ffb59a40
+
+
+# ╔═╡ 08516ec4-c572-4dec-8efa-4034dd91cb9f
+md"""
+## Submit your notebook!
+Would you like **_your cool notebook_** to become an interactive web page?
+
+You can either:
+
+1. email your notebook to [fons@plutojl.org](mailto:fons@plutojl.org)
+2. open a Pull Request to [this repository](https://github.com/JuliaPluto/PlutoCon2021-demos), adding your notebook.
+
+Be sure to write your name and an introduction inside the notebook. Use `@bind` to make your notebook interactive!
+"""
+
 # ╔═╡ 74966583-b867-491d-9cba-38e3e827a3d8
 
 
@@ -70,7 +114,7 @@ overflow-x: hidden;
 
 # ╔═╡ 34cab700-81a4-4ff8-9940-bc823065eea2
 md"""
-### Appendix
+## Appendix
 """
 
 # ╔═╡ ff3c1dcb-b023-4d12-9b74-1090be7a8dbc
@@ -109,7 +153,14 @@ end |> join
 
 # ╔═╡ Cell order:
 # ╟─c09023be-e4a3-4969-a938-6a9d46008c4b
+# ╟─c6e22e1b-759f-4eca-b3c6-2d16b133c79d
+# ╟─03869e11-5785-4b05-b830-64e25aa66dc6
+# ╟─92fa5931-5ac5-4358-a141-210f73806925
 # ╟─376534be-acfa-4c65-a9c0-d424c63e8a4e
+# ╟─a5d4e8bc-75b6-40c9-81cd-220f41d16261
+# ╟─29507706-e205-4c14-8535-b56955093f2f
+# ╟─5fc9f211-1519-4843-a3e5-3bf2ffb59a40
+# ╟─08516ec4-c572-4dec-8efa-4034dd91cb9f
 # ╟─74966583-b867-491d-9cba-38e3e827a3d8
 # ╟─416fb2fa-9b31-4e27-9722-6bf8bc6fdf30
 # ╟─9aa74fa4-e1fa-4847-88f5-0805efaaec1a
