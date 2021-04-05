@@ -10,4 +10,5 @@ ignore_cache = [
 [SliderServer]
 exclude=[
     "index.jl",
+    "Benjamin_Lungwitz_MarketRisk_time_series.jl",
 ]
