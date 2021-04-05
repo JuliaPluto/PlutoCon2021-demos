@@ -166,16 +166,16 @@ uuid = "44cfe95a-1eb2-52ea-b672-e2afdf69b78f"
 
 [[Pluto]]
 deps = ["Base64", "Dates", "Distributed", "FileWatching", "FuzzyCompletions", "HTTP", "InteractiveUtils", "Logging", "Markdown", "MsgPack", "Pkg", "REPL", "Sockets", "TableIOInterface", "Tables", "UUIDs"]
-git-tree-sha1 = "54639d0fc19f2e3fef5732280ff3cdc651decc2f"
-repo-rev = "e6ce92a"
+git-tree-sha1 = "44a1a6ce03f742f10be9e59281a3cb90dfb080f4"
+repo-rev = "13a17f5"
 repo-url = "https://github.com/fonsp/Pluto.jl"
 uuid = "c3e4b0f8-55cb-11ea-2926-15256bba5781"
 version = "0.15.0"
 
 [[PlutoSliderServer]]
 deps = ["Base64", "Configurations", "GitHubActions", "HTTP", "Logging", "Pkg", "Pluto", "SHA", "Sockets", "TOML", "UUIDs"]
-git-tree-sha1 = "dda2304e4cbf73d42d8167c3afd48f597ef94fec"
-repo-rev = "b434f2c"
+git-tree-sha1 = "61b0d81048bdadadd3885c8e8f983750fd327d0c"
+repo-rev = "e3364b9"
 repo-url = "https://github.com/JuliaPluto/PlutoSliderServer.jl"
 uuid = "2fc8631c-6f24-4c5b-bca7-cbb509c42db4"
 version = "0.2.0"
