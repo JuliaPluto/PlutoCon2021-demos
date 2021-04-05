@@ -30,6 +30,9 @@ md"## PlutoCon 2021 WYSIWYR Demo (MNIST)"
 # ╔═╡ 5fbc7f13-e043-442b-b51f-3337ca0fb1c9
 md"In this notebook we will load a pretrained model for classifying MNIST handwritten digits from 28x28 greyscale images. However, this notebook is less about the model and more about interacting with it via \"what you see is what you REST\" features."
 
+# ╔═╡ a25e898b-bb40-410c-9987-0571a737c9c4
+ENV["DATADEPS_ALWAYS_ACCEPT"] = "true";
+
 # ╔═╡ d5372041-c6ad-4e7c-85f1-b5f99457023a
 md"### Loading Data
 
@@ -125,6 +128,7 @@ display_digit(input_images[:, :, 1, input_images_slice |> first])
 # ╟─e66e4c79-5408-40ca-b31d-9ffa9a8ff122
 # ╟─fd12ac50-9633-11eb-05ab-df8a67a47c96
 # ╟─5fbc7f13-e043-442b-b51f-3337ca0fb1c9
+# ╟─a25e898b-bb40-410c-9987-0571a737c9c4
 # ╟─d5372041-c6ad-4e7c-85f1-b5f99457023a
 # ╠═e303a531-db01-4e67-a1f6-33d2ca023eee
 # ╟─bd2902c6-205a-40a0-95e1-175abb5dd7b5
