@@ -60,7 +60,7 @@ md"
 "
 
 # ╔═╡ 6b2af920-7b1d-4a95-acef-7c4bf48bd682
-html"<h3>Trying the model <i style=\"font-size: 0.75em\">(and building the API too!)</i></h3>
+html"<h3>Testing the model <i style=\"font-size: 0.75em\">(and building the API too!)</i></h3>
 "
 
 # ╔═╡ 40cdd1ae-4109-4d6a-a7de-734970d2b607
@@ -68,9 +68,9 @@ md"First we assign a variable `input_images` to a small slice of test data."
 
 # ╔═╡ 87d01adf-3a42-4c1d-bdda-5b3f3b67f50d
 md"""
-Start Index: $(@bind start_index TextField())
+Start Index: $(@bind start_index NumberField(1:length(test_y); default=1))
 
-End Index: $(@bind end_index TextField())
+End Index: $(@bind end_index NumberField(1:length(test_y); default=10))
 """
 
 # ╔═╡ 17775e37-13d3-48ea-9033-8332502043e7
@@ -84,22 +84,25 @@ The highest value by far is in the 8th index, which corresponds to the model pre
 # ╔═╡ b17950b2-b742-4cb2-8275-5f4c0e3d98c4
 md"The last step is to convert these predictions into numbers, then compare them to their true labels"
 
+# ╔═╡ 500e9a99-e6ad-4f9f-80ac-d17fd046513c
+md"Finally we can measure the accuracy of the model by comparing our predictions to the actual labels and finding the average."
+
 # ╔═╡ 04579da3-d4f7-4498-8e4d-81ded9bbd077
 html"""<h3 style="margin-top: 100px;">Helpers</h3>"""
 
 # ╔═╡ f06ff43e-2d33-4a3e-9c72-fa63d11a879a
 function default(x)
-	return y -> isnothing(y) ? x : y
+	return y -> (isnothing(y) || isnan(y)) ? x : y
 end
 
-# ╔═╡ 4b90f616-c082-423f-a16c-fda3d35efc0f
-parsed_start_index = tryparse(Int, start_index) |> default(1)
+# ╔═╡ 83df5406-aade-4c9d-ae55-eeaea102e812
+safe_start_index = max(start_index |> default(1), 1)
 
-# ╔═╡ cf66df1d-3d7d-447e-b2e9-b2c24d08f92a
-parsed_end_index = tryparse(Int, end_index) |> default(10)
+# ╔═╡ 8a0b0855-913a-4342-a876-f292cc88447f
+safe_end_index = min(end_index |> default(10), length(test_y))
 
 # ╔═╡ 2156a6a2-ad5f-40ff-b02b-d5ce70abfd6e
-input_images_slice = parsed_start_index:parsed_end_index
+input_images_slice = min(safe_start_index, safe_end_index):max(safe_start_index, safe_end_index)
 
 # ╔═╡ 1fa33e70-00e2-48b4-9738-290ba9ab7b67
 input_images = Flux.unsqueeze(test_x, 3)[:, :, :, input_images_slice];
@@ -113,6 +116,9 @@ output_labels = Flux.onecold(predictions, 0:9)
 # ╔═╡ e78e5119-93fd-44b7-9672-f6cc65e21039
 test_labels = test_y[input_images_slice]
 
+# ╔═╡ 68b045b2-5781-4d07-9a9d-30567509b4c6
+Int.(output_labels .== test_labels)
+
 # ╔═╡ 2ca1a052-4160-4b4e-90a3-779e3a5f8510
 accuracy = mean(output_labels .== test_labels)
 
@@ -122,7 +128,7 @@ function display_digit(img)
 end
 
 # ╔═╡ acc15562-6a27-46fc-820b-6c60106d1880
-display_digit(input_images[:, :, 1, input_images_slice |> first])
+display_digit(input_images[:, :, 1, 1])
 
 # ╔═╡ Cell order:
 # ╟─e66e4c79-5408-40ca-b31d-9ffa9a8ff122
@@ -139,8 +145,8 @@ display_digit(input_images[:, :, 1, input_images_slice |> first])
 # ╟─6b2af920-7b1d-4a95-acef-7c4bf48bd682
 # ╟─40cdd1ae-4109-4d6a-a7de-734970d2b607
 # ╟─87d01adf-3a42-4c1d-bdda-5b3f3b67f50d
-# ╠═4b90f616-c082-423f-a16c-fda3d35efc0f
-# ╠═cf66df1d-3d7d-447e-b2e9-b2c24d08f92a
+# ╠═83df5406-aade-4c9d-ae55-eeaea102e812
+# ╠═8a0b0855-913a-4342-a876-f292cc88447f
 # ╠═2156a6a2-ad5f-40ff-b02b-d5ce70abfd6e
 # ╠═1fa33e70-00e2-48b4-9738-290ba9ab7b67
 # ╟─17775e37-13d3-48ea-9033-8332502043e7
@@ -150,6 +156,8 @@ display_digit(input_images[:, :, 1, input_images_slice |> first])
 # ╟─b17950b2-b742-4cb2-8275-5f4c0e3d98c4
 # ╠═3cacfe80-fe88-4580-9c38-b4d5779901cb
 # ╠═e78e5119-93fd-44b7-9672-f6cc65e21039
+# ╟─500e9a99-e6ad-4f9f-80ac-d17fd046513c
+# ╠═68b045b2-5781-4d07-9a9d-30567509b4c6
 # ╠═2ca1a052-4160-4b4e-90a3-779e3a5f8510
 # ╟─04579da3-d4f7-4498-8e4d-81ded9bbd077
 # ╠═f06ff43e-2d33-4a3e-9c72-fa63d11a879a
