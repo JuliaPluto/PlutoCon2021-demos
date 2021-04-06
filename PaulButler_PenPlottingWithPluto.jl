@@ -19,12 +19,12 @@ begin
 	Pkg.activate(mktempdir())
 	Pkg.add([
 			Pkg.PackageSpec(url="https://github.com/paulgb/PenPlots.jl"),
+			Pkg.PackageSpec(name="PlutoUI", version="0.7"),
+			Pkg.PackageSpec(name="Images", version="0.23"),
+			Pkg.PackageSpec(name="ImageMagick", version="1"),
+			Pkg.PackageSpec(name="ImageFiltering", version="0.6"),
+			Pkg.PackageSpec(name="FileIO", version="1"),
 			])
-	Pkg.add("PlutoUI")
-	Pkg.add("Images")
-	Pkg.add("FileIO")
-	Pkg.add("ImageFiltering")
-	Pkg.add("QuartzImageIO")
 
 	using PenPlots
 	using Random
@@ -233,7 +233,7 @@ md"Now, we need a base image to draw. My wife Sarah is more photogenic than I am
 so I'm using her image."
 
 # ╔═╡ faca2691-c706-4bb2-b5c5-05e2fe0539c2
-rawimage = load("PaulButler_PenPlottingWithPluto/image.jpg")
+rawimage = load(download("https://user-images.githubusercontent.com/6933510/113714134-61a95b00-96e8-11eb-9c67-6170996bc6c6.png"))
 
 # ╔═╡ a14c7906-40af-439e-bd79-8f40fdaa8d79
 md"For simplicity, I'll stick to a single-pen plot, so I'm only interested in the
