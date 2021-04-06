@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.12.21
+# v0.14.0
 
 using Markdown
 using InteractiveUtils
@@ -46,8 +46,28 @@ md"""
 ## Trade Definitions
 """
 
+# ╔═╡ 9ee3b9c3-466c-479f-9beb-0098fad79e0f
+md"""
+For this example, a portfolio of cash-settled FX Forwards is used. 
+
+Cash-settled FX Forwards are rather simple products because they only have a single cashflow at maturity $T$:
+
+\begin{equation}
+CF(T) = Notional \cdot \left( FX_{contractual}(T) - FX(T) \right)
+\end{equation}
+
+Thus, the present value at $t < T$ is:
+\begin{equation}
+PV(t) = Notional \cdot \left( FX_{contractual}(T) - FX(t, T) \right) \cdot df(t, T)
+\end{equation}
+
+Where $FX(t, T)$ is the FX forward rate and $df(t, T)$ the discount factor from $t$ to $T$.
+"""
+
 # ╔═╡ b8665350-51e0-11eb-13f6-d902368ec2ab
 all_trades = [
+	# parameters: 1. notional, 2. settlement currency, 3. contractual FX rate,
+	# 4. time to maturity (T-t)
 	FXForward(100000.0EUR, USD, 1.2USD/EUR, t"3M"),
 	FXForward(100000.0USD, EUR, 0.9EUR/USD, t"3M"),
 	FXForward(100000.0USD, SEK, 9.5SEK/USD, t"6M"),
@@ -55,9 +75,19 @@ all_trades = [
 	FXForward(100000.0USD, EUR, 0.95EUR/USD, t"2M"),
 ]
 
+# ╔═╡ 99be0f5d-c52e-4d79-9b3d-ea23028f515b
+md"""
+For simplicity, this portfolio contains only one product type, but this approach may be generalized to any portfolio.
+"""
+
 # ╔═╡ bb8a57c0-54e2-11eb-05dd-cb81329ee0c0
 md"""
 ## Price Time Series
+"""
+
+# ╔═╡ 44035cbd-ced1-4b85-85ef-8b3c4ece03fa
+md"""
+This is the time dependence of the present value (in EUR) for the single trades and the total portfolio.
 """
 
 # ╔═╡ 3244b430-54d6-11eb-14bc-1357fda1020c
@@ -65,9 +95,18 @@ md"""
 ## Market Risk
 """
 
+# ╔═╡ 09459651-740c-4dae-8fde-86cc8b2359c2
+md"""
+The Value-at-Risk $VaR_n^c$ is defined as the maximum loss a portfolio does not exceed in a given time horizon $n$ with the confidence level $c$.
+
+E.g. $VaR^{99\%}_{5d} = 1,000,000 EUR$ means that the present value of the portfolio decreases in 5 business days by a value of less than 1 million EUR in $99\%$ of the cases.
+
+VaR is one of the most commonly used measures for market risk in financial industry.
+"""
+
 # ╔═╡ 8ade16f0-54d5-11eb-3fe9-d334f1578236
 md"""
-VaR Confidence Level:
+VaR Confidence Level $c$:
 """
 
 # ╔═╡ 66ab6d50-54d5-11eb-152a-299a27e573f6
@@ -75,19 +114,33 @@ VaR Confidence Level:
 
 # ╔═╡ a0218290-54d5-11eb-3e54-abf6eb6fb8fd
 md"""
-VaR Time Horizon (business days):
+VaR Time Horizon $n$ (in business days):
 """
 
 # ╔═╡ a8cf57a2-54d5-11eb-2679-8f44e902d5d7
 @bind time_horizon NumberField(1:20, default=1)
 
+# ╔═╡ 37e98c9b-9c83-4559-b6c7-caf30b2ecc7d
+md"""
+There are different methods for the calculation of VaR. 
+
+In this notebook, we are using the (classical) *historical simulation* method, where past returns of each risk factor are applied on the current value of the risk factor to generate sceanario P&Ls (= Profit & Loss, PV difference between $t$ and $t+n$).
+
+The main parameter for a historical simulation is the *Lookback Period* $L$, this is the time period before the current date included for the historical scenarios.
+"""
+
 # ╔═╡ dd6a98d0-54d5-11eb-2151-59ab4f323fa0
 md"""
-Lookback Period:
+Lookback Period $L$ (in business days):
 """
 
 # ╔═╡ f010eb60-54d5-11eb-0652-db1e8c3bc560
 @bind lookback_period NumberField(1:1000, default=250)
+
+# ╔═╡ 1095cf15-475e-443d-b685-939509de6c4d
+md"""
+The VaR results for a specific calculation date:
+"""
 
 # ╔═╡ ac367dd0-54dd-11eb-3124-7961cef8a5c3
 md"""
@@ -99,11 +152,27 @@ md"""
 ## VaR Time Series
 """
 
+# ╔═╡ 27cfe650-de9a-4a77-bee9-f92e6eaa7363
+md"""
+In order to assess the validity of the risk model, it is not sufficient to look at the VaR numbers for a specific date. Instead, the VaR numbers for a longer period are calculated and compared to the realized P&Ls, the so-called $backtesting$.
+
+The most fundamental backtest is for the number of outliers - for a VaR with confidence level $C$ it is expected that the fraction of days where the loss exceeds VaR is $1-c$.
+
+In oder to assess the statistical significance of the observed number of outliers, a $\chi^2$ hypothesis test, the so-called *Kupiec POF* test, is used. 
+
+From regulatory side (Basel-regulation), a traffic light is defined based on the probability to reject a correct risk model: 
+
+🟡 for level 2 error probability $<5\%$ (corresponding to $\chi^2$ probability of $≥ 0.95$),
+
+🔴 for level 2 error probability $< 0.01\%$ (corresponding to $\chi^2$ probability of $≥ 0.9999$).
+
+"""
+
 # ╔═╡ e1e2eea0-54e2-11eb-070d-4d2716c886b9
 md"""
 Calculate VaR Time Series?
 
-(Note: it takes ca. 30s on my machine and updates on any VaR parameter change)
+(Note: it takes ca. 30s on my machine and is updated on any VaR parameter change)
 """
 
 # ╔═╡ d786581e-54e2-11eb-0a84-bdaae4eb3409
@@ -334,21 +403,28 @@ md"""
 # ╔═╡ Cell order:
 # ╟─ac41d630-54e2-11eb-3dde-f374a3e297c7
 # ╟─527c6812-51d9-11eb-312a-4f9a773af0e1
+# ╟─9ee3b9c3-466c-479f-9beb-0098fad79e0f
 # ╠═b8665350-51e0-11eb-13f6-d902368ec2ab
+# ╟─99be0f5d-c52e-4d79-9b3d-ea23028f515b
 # ╟─bb8a57c0-54e2-11eb-05dd-cb81329ee0c0
-# ╠═4703e0a0-51e1-11eb-225c-ebddbe0e887c
+# ╟─44035cbd-ced1-4b85-85ef-8b3c4ece03fa
+# ╟─4703e0a0-51e1-11eb-225c-ebddbe0e887c
 # ╟─3244b430-54d6-11eb-14bc-1357fda1020c
+# ╟─09459651-740c-4dae-8fde-86cc8b2359c2
 # ╟─8ade16f0-54d5-11eb-3fe9-d334f1578236
 # ╟─66ab6d50-54d5-11eb-152a-299a27e573f6
 # ╟─a0218290-54d5-11eb-3e54-abf6eb6fb8fd
 # ╟─a8cf57a2-54d5-11eb-2679-8f44e902d5d7
+# ╟─37e98c9b-9c83-4559-b6c7-caf30b2ecc7d
 # ╟─dd6a98d0-54d5-11eb-2151-59ab4f323fa0
 # ╟─f010eb60-54d5-11eb-0652-db1e8c3bc560
+# ╟─1095cf15-475e-443d-b685-939509de6c4d
 # ╟─ac367dd0-54dd-11eb-3124-7961cef8a5c3
 # ╟─36239c10-54d6-11eb-220a-31ecf19a578a
 # ╟─c46e4a40-54dd-11eb-2f11-11f08927507e
 # ╟─f2e7ea12-54de-11eb-14af-7fe117d7b403
 # ╟─f1c406b0-54e2-11eb-1522-bf45d8cfae34
+# ╟─27cfe650-de9a-4a77-bee9-f92e6eaa7363
 # ╟─e1e2eea0-54e2-11eb-070d-4d2716c886b9
 # ╟─d786581e-54e2-11eb-0a84-bdaae4eb3409
 # ╟─b4579480-54e3-11eb-344f-ed787fa284a7
