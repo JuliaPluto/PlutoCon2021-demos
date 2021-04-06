@@ -21,7 +21,6 @@ begin
 			Pkg.PackageSpec(url="https://github.com/paulgb/PenPlots.jl"),
 			])
 	Pkg.add("PlutoUI")
-<<<<<<< HEAD
 	Pkg.add("Images")
 	Pkg.add("FileIO")
 	Pkg.add("ImageFiltering")
@@ -33,23 +32,14 @@ begin
 	using PlutoUI
 	using Images, FileIO
 	using ImageFiltering
-=======
-	using PenPlots
-	using Random
-	using Base.Iterators
-	using PlutoUI	
->>>>>>> 9c4caa541d897c2dd1397f30247d797dc835e44a
 end
 
 # ╔═╡ fde6fd72-340f-4bee-82c7-6e7924f7c72a
 md"
 # Pen Plotting with Pluto
 
-<<<<<<< HEAD
 By [Paul Butler](https://paulbutler.org) ([@paulgb](https://twitter.com/paulgb)) for [PlutoCon2021](https://plutojl.org/plutocon2021)
 
-=======
->>>>>>> 9c4caa541d897c2dd1397f30247d797dc835e44a
 A plotter is a robot that draws based on instructions you provide it.
 
 There are basically three varieties of plotters:
@@ -193,7 +183,6 @@ PenPlot(
 	end)]
 )
 
-<<<<<<< HEAD
 # ╔═╡ 1158b419-145e-48f4-9ddc-c847689ae8ab
 md"
 # Representing an Image with Amplitude Modulation
@@ -302,10 +291,6 @@ md"
 
 _The following are some topics that I did not cover in my talk, but have provided for your exploration and experimentation._
 
-=======
-# ╔═╡ 03fd1d18-e06c-4054-b0dd-2ec24d1d064d
-md"
->>>>>>> 9c4caa541d897c2dd1397f30247d797dc835e44a
 ## Recursion
 
 ### Drawing a [Koch Curve](https://en.wikipedia.org/wiki/Koch_snowflake)
@@ -342,19 +327,11 @@ Angle 2: $(@bind angle2 PlutoUI.Slider(-60:60, default=40))
 "
 
 # ╔═╡ 5e28fe02-bbbc-447b-9fb4-412f0030e0f9
-<<<<<<< HEAD
 function tree(angle1, angle2, i=8)
 	if i == 1
 		[Path([Point(0, 0), Point(0, -1)])]
 	else
 		c = tree(angle1, angle2, i-1)
-=======
-function tree(i=8)
-	if i == 1
-		[Path([Point(0, 0), Point(0, -1)])]
-	else
-		c = tree(i-1)
->>>>>>> 9c4caa541d897c2dd1397f30247d797dc835e44a
 		vcat(
 			[Path([Point(0, 0), Point(0, -1)])],
 			Point(0, -1/2) + degree_rotation(angle1) * (Point(0.8, 0.8) * c),
@@ -364,11 +341,7 @@ function tree(i=8)
 end
 
 # ╔═╡ 106b111e-4734-4348-9315-8876788b3b78
-<<<<<<< HEAD
 tree(angle1, angle2)
-=======
-tree()
->>>>>>> 9c4caa541d897c2dd1397f30247d797dc835e44a
 
 # ╔═╡ 02cb3826-49a1-456a-bc9f-7e86b34adf04
 md"
@@ -376,31 +349,18 @@ md"
 
 Seed: $(@bind seed NumberField(1:100000))
 
-<<<<<<< HEAD
 Big Period: $(@bind big_period Slider(1:20, default=7))
 
 Small Period: $(@bind small_period Slider(1:20, default=4))
-=======
-Big Period: $(@bind big_period Slider(1:100, default=7))
-
-Small Period: $(@bind small_period Slider(1:100, default=4))
->>>>>>> 9c4caa541d897c2dd1397f30247d797dc835e44a
 
 Outer Radius: $(@bind radius Slider(1:0.1:10, default=5))
 "
 
 # ╔═╡ d55cc824-2f51-4917-961e-4651acdba78f
-<<<<<<< HEAD
 function noise_spiral(seed, small_period, big_period, radius)
 	noise = random_vector_matrix(MersenneTwister(seed), big_period, small_period)
 	
 	map(0:0.004:1-eps()) do j
-=======
-begin
-	noise = random_vector_matrix(MersenneTwister(seed), big_period, small_period)
-	
-	map(0:0.004:1) do j
->>>>>>> 9c4caa541d897c2dd1397f30247d797dc835e44a
 		r = 1 + perlin_noise(noise, Point(j*big_period, 0))
 		center = radius * frac_rotation(j) * unitvec * r
 
@@ -411,7 +371,6 @@ begin
 	end
 end
 
-<<<<<<< HEAD
 # ╔═╡ f014ec05-6034-4b60-9d76-b5ff82079c0f
 noise_spiral(seed, big_period, small_period, radius)
 
@@ -421,8 +380,6 @@ PenPlot(
 	noise_spiral(4, 6, 6, 5)
 )
 
-=======
->>>>>>> 9c4caa541d897c2dd1397f30247d797dc835e44a
 # ╔═╡ Cell order:
 # ╟─fde6fd72-340f-4bee-82c7-6e7924f7c72a
 # ╟─63d97678-f575-428a-a198-80f51ad39fee
@@ -439,7 +396,6 @@ PenPlot(
 # ╠═2ea203c3-69e2-4355-8810-f1eb72b41dc2
 # ╟─f208b8cc-9935-45ba-bd1f-c4b2a2d2be1c
 # ╠═7fab0683-d27f-4fbe-af9e-4ed2d080f8f0
-<<<<<<< HEAD
 # ╟─1158b419-145e-48f4-9ddc-c847689ae8ab
 # ╠═57961391-7013-4298-bde2-9e67e0d2da97
 # ╠═4776c9fc-f49d-4543-a325-abbac93b1da7
@@ -457,8 +413,6 @@ PenPlot(
 # ╟─ba3bca76-e41d-4a35-816e-bbb68a6d8ab9
 # ╠═6f14a8ff-bc27-48d8-b08c-06a457cac8eb
 # ╠═2a2620d3-dfdb-4d09-83f6-14fda0a9c408
-=======
->>>>>>> 9c4caa541d897c2dd1397f30247d797dc835e44a
 # ╟─03fd1d18-e06c-4054-b0dd-2ec24d1d064d
 # ╠═b602267f-bc59-4a3c-a0ac-7aa50cc8f467
 # ╠═20013826-2660-4f05-9636-c2883117a730
@@ -468,9 +422,6 @@ PenPlot(
 # ╠═106b111e-4734-4348-9315-8876788b3b78
 # ╟─02cb3826-49a1-456a-bc9f-7e86b34adf04
 # ╠═d55cc824-2f51-4917-961e-4651acdba78f
-<<<<<<< HEAD
 # ╠═f014ec05-6034-4b60-9d76-b5ff82079c0f
 # ╠═f608a507-378f-4a9e-872d-4addb992f908
-=======
->>>>>>> 9c4caa541d897c2dd1397f30247d797dc835e44a
 # ╠═d0bdce5e-9486-11eb-38be-73bd0f9ccab4
