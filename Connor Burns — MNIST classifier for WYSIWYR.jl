@@ -44,8 +44,11 @@ MNIST.download(; i_accept_the_terms_of_use=true);
 # ╔═╡ bd2902c6-205a-40a0-95e1-175abb5dd7b5
 md"Now we load a pre-trained model which has been serialized with Julia's native [serialization library](https://docs.julialang.org/en/v1/stdlib/Serialization/). The model is made up of 3 convolutional layers, 3 max pooling layers, and one dense layer." 
 
+# ╔═╡ 951f7eeb-6d45-427c-b053-fdecfb38041b
+serialized_model_path = download("http://cot.llc/mnist_conv")
+
 # ╔═╡ 35d38823-aa1d-44f1-a66a-2afe4c30478c
-model = open(io -> deserialize(io), "mnist_conv.jls")
+model = open(io -> deserialize(io), serialized_model_path)
 
 # ╔═╡ 9267d0e8-e736-434f-9da8-b12316dc248e
 md"To test our model we will only load in the test data. Our model was trained with training data from `MNIST.traindata()` in another notebook."
@@ -138,6 +141,7 @@ display_digit(input_images[:, :, 1, 1])
 # ╟─d5372041-c6ad-4e7c-85f1-b5f99457023a
 # ╠═e303a531-db01-4e67-a1f6-33d2ca023eee
 # ╟─bd2902c6-205a-40a0-95e1-175abb5dd7b5
+# ╠═951f7eeb-6d45-427c-b053-fdecfb38041b
 # ╠═35d38823-aa1d-44f1-a66a-2afe4c30478c
 # ╟─9267d0e8-e736-434f-9da8-b12316dc248e
 # ╠═95197d78-f492-40e6-a08f-fa01950fda12
