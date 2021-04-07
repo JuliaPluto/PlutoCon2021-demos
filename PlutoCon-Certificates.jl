@@ -51,7 +51,7 @@ html"""
 
 # ╔═╡ 4ca7078c-930c-11eb-3e97-c36bb767b96b
 html"""
-<script src="https://unpkg.com/jspdf@latest/dist/jspdf.umd.min.js"></script>
+<script src="https://unpkg.com/jspdf@2.3.1/dist/jspdf.umd.min.js"></script>
 <script src="https://unpkg.com/svg2pdf.js@2.1.0/dist/svg2pdf.umd.min.js">
 </script>
 """
