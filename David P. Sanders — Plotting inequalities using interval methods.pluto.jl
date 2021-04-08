@@ -24,8 +24,9 @@ begin
         Pkg.PackageSpec(name="Symbolics", version="0.1"),
         Pkg.PackageSpec(name="PlutoUI", version="0.7"),
         Pkg.PackageSpec(name="LaTeXStrings", version="1"),
+        Pkg.PackageSpec(name="Pluto", rev="13a17f5"),
 	])
-    using Plots, ReversePropagation, IntervalArithmetic, Symbolics, PlutoUI, LaTeXStrings, Distributed
+    using Plots, ReversePropagation, IntervalArithmetic, Symbolics, PlutoUI, LaTeXStrings, Pluto
 	IntervalArithmetic.configure!(directed_rounding=:fast, powers=:fast)
 end
 
@@ -186,10 +187,11 @@ Since we're working in 2D, let's make two symbolic variables $x$ and $y$:
 """
 
 # ╔═╡ b0a03acd-3906-44c9-9614-c6c32459f2b6
-vars = @variables x y
-
-# ╔═╡ 40b81b5b-1097-45d0-a973-3ca2c5abcbf9
-x
+vars = begin
+	x = y = nothing # to make pluto understand
+	
+	@variables x y
+end
 
 # ╔═╡ 90d3eade-19fa-4e87-9e7b-8b3dce8bbd3f
 md"""
@@ -525,10 +527,10 @@ end
 
 # ╔═╡ 05ed1e0e-074e-4c7d-9763-48523c90d830
 "Use Pluto to get the variables referenced in an expression. Don't try this at home kids"
-get_references_hacky(s) = Distributed.remotecall_eval(Main, 1, quote
-		result = Main.Pluto.ReactiveNode($(s)) 
-		result.references
-	end)
+get_references_hacky(s) = let
+	result = Pluto.ReactiveNode(s)
+	result.references
+end
 
 # ╔═╡ fa3a3229-d4ac-4582-adec-f8891ecac06f
 const legal_refs = [:a, :b, :c, :d, :x, :y, :+, :-, :*, :/, :<, :≤, :≥, :>, :sin, :cos, :expr, :log, :log10, :^, :sqrt]
@@ -600,7 +602,6 @@ $([Markdown.Code("julia", e) for e in examples])
 # ╟─d585f87e-63d6-487c-a7dc-4c2dca15ca4d
 # ╟─8d0e9542-8231-4af9-855b-5ea72c097ee9
 # ╠═b0a03acd-3906-44c9-9614-c6c32459f2b6
-# ╠═40b81b5b-1097-45d0-a973-3ca2c5abcbf9
 # ╟─90d3eade-19fa-4e87-9e7b-8b3dce8bbd3f
 # ╠═4c2577d3-15d9-4f7b-96b6-6dd23a013b92
 # ╟─f12ad635-9dd5-4c7b-8168-806733657e83
