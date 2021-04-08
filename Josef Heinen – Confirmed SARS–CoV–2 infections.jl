@@ -24,6 +24,15 @@ begin
     GR.js.init_pluto()
 end
 
+# ╔═╡ b2107723-4ff8-4d0f-84b2-4051f8ff48f5
+md"""
+## Plotting confirmed SARS–CoV–2 infections
+### Author: [Josef Heinen](https://github.com/jheinen)
+
+#### Required packages: PlutoUI, GR
+
+"""
+
 # ╔═╡ 49d120ea-2699-11eb-203d-fddbb33bb08b
 begin
 	url = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv"
@@ -64,6 +73,7 @@ plot(day, confirmed, xlim=(0, ndays+1), ylim=(10, 20_000_000), ylog=true,
      labels=countries, location=4)
 
 # ╔═╡ Cell order:
+# ╠═b2107723-4ff8-4d0f-84b2-4051f8ff48f5
 # ╠═e2d1cb38-2698-11eb-2e59-632faa201d6f
 # ╠═49d120ea-2699-11eb-203d-fddbb33bb08b
 # ╠═4b5f800a-2699-11eb-2528-b5917c0461cf
