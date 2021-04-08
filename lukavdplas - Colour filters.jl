@@ -44,11 +44,10 @@ We start by loading an image to work with.
 """
 
 # ╔═╡ ca75f874-f845-11ea-1d22-9352f0e872bb
-download("https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Giant_Pandas_having_a_snack.jpg/1280px-Giant_Pandas_having_a_snack.jpg",
-	"pandas.jpg")
+pandas_filename = download("https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Giant_Pandas_having_a_snack.jpg/1280px-Giant_Pandas_having_a_snack.jpg")
 
 # ╔═╡ e6a44cf8-f845-11ea-0918-6585b79b2981
-pandas = load("pandas.jpg")
+pandas = load(pandas_filename)
 
 # ╔═╡ eff44dc8-08be-417e-b560-a5e337ae21f4
 md"""
