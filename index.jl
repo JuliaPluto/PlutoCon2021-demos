@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.14.0
+# v0.14.1
 
 using Markdown
 using InteractiveUtils
@@ -59,6 +59,15 @@ overflow-x: hidden;
 # ╔═╡ c6e22e1b-759f-4eca-b3c6-2d16b133c79d
 md"""
 Welcome to the PlutoCon demo page! The notebooks on this site were submitted by Pluto users, and you can view them in your browser. Just like the website [computationalthinking.mit.edu](computationalthinking.mit.edu), we will use our [fancy new technology](https://github.com/JuliaPluto/PlutoSliderServer.jl) to run sliders, button, webcam inputs, etc. directly on the website.
+"""
+
+# ╔═╡ 97cb9fe9-93b7-4380-84ab-4ea339c2cbca
+md"""
+## PlutoCon schedule
+
+> To see the talks accompanying these notebooks, take a look the the PlutoCon website!
+> 
+> **[https://plutojl.org/plutocon2021](https://plutojl.org/plutocon2021)**
 """
 
 # ╔═╡ 03869e11-5785-4b05-b830-64e25aa66dc6
@@ -123,10 +132,21 @@ i_am_at = pwd()
 # ╔═╡ 8b4d1fe6-e689-44d3-8e31-ce6e3162d882
 friends = readdir(i_am_at)
 
+# ╔═╡ 29cdf7d3-e5c0-4c70-ac1e-f78abbf3e768
+const pluto_file_extensions = [
+    ".pluto.jl",
+    ".jl",
+    ".plutojl",
+    ".pluto",
+]
+
+# ╔═╡ 827c3921-5da5-4426-966b-07c286477094
+endswith_pluto_file_extension(s) = any(endswith(s, e) for e in pluto_file_extensions)
+
 # ╔═╡ bcd491b0-50cc-4cd4-9751-9ba8b39f7e0d
 notebookfiles = let
 	allfiles = filter(isfile, friends)
-	jlfiles = filter(x -> occursin(".jl",x), allfiles)
+	jlfiles = filter(endswith_pluto_file_extension, allfiles)
 	
 	plutofiles = filter(jlfiles) do f
 		readline(f) == "### A Pluto.jl notebook ###"
@@ -135,15 +155,21 @@ notebookfiles = let
 	setdiff(plutofiles, ["index.jl"])
 end
 
+# ╔═╡ 9c914145-d242-47df-bfc2-3ea139d3e9ae
+function without_pluto_file_extension(s)
+    for e in pluto_file_extensions
+        if endswith(s, e)
+            return s[1:end-length(e)]
+        end
+    end
+    s
+end
+
 # ╔═╡ 376534be-acfa-4c65-a9c0-d424c63e8a4e
 all_the_notebooks = """
 <ul>
 $(map(notebookfiles) do path
-	html_filename = if endswith(path, ".jl")
-		path[1:end-3] * ".html"
-	else
-		path * ".html"
-	end
+	html_filename = without_pluto_file_extension(path) * ".html"
 	
 "<li><a href=\"$(html_filename)\">$(html_filename[1:end-5])</a></li>"
 end |> join
@@ -154,6 +180,7 @@ end |> join
 # ╔═╡ Cell order:
 # ╟─c09023be-e4a3-4969-a938-6a9d46008c4b
 # ╟─c6e22e1b-759f-4eca-b3c6-2d16b133c79d
+# ╟─97cb9fe9-93b7-4380-84ab-4ea339c2cbca
 # ╟─03869e11-5785-4b05-b830-64e25aa66dc6
 # ╟─92fa5931-5ac5-4358-a141-210f73806925
 # ╟─376534be-acfa-4c65-a9c0-d424c63e8a4e
@@ -172,3 +199,6 @@ end |> join
 # ╟─ff3c1dcb-b023-4d12-9b74-1090be7a8dbc
 # ╟─8b4d1fe6-e689-44d3-8e31-ce6e3162d882
 # ╟─bcd491b0-50cc-4cd4-9751-9ba8b39f7e0d
+# ╟─29cdf7d3-e5c0-4c70-ac1e-f78abbf3e768
+# ╟─827c3921-5da5-4426-966b-07c286477094
+# ╟─9c914145-d242-47df-bfc2-3ea139d3e9ae
