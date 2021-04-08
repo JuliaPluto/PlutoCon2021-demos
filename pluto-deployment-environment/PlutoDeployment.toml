@@ -11,4 +11,5 @@ ignore_cache = [
 exclude=[
     "index.jl",
     "Benjamin_Lungwitz_MarketRisk_time_series.jl",
+    "Vikas Negi - Visualizing Samsung Health App Data.jl",
 ]
