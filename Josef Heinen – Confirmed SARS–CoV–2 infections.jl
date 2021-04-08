@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.14.0
+# v0.14.1
 
 using Markdown
 using InteractiveUtils
@@ -18,10 +18,10 @@ begin
     using DelimitedFiles
 	using PlutoUI
 
-	ENV["GRDISPLAY"] = "pluto"
+	ENV["GRDISPLAY"] = "pluto" # see note above
     using GR
 	
-    GR.js.init_pluto()
+    GR.js.init_pluto() # see note above
 end
 
 # ╔═╡ b2107723-4ff8-4d0f-84b2-4051f8ff48f5
@@ -31,6 +31,7 @@ md"""
 
 #### Required packages: PlutoUI, GR
 
+You may have to comment out the Pluto part, if you are running the script on a remote web server. If you are running the script in a local notebook server, you will be able to pan/zoom the plot and display information when hovering over the data points.
 """
 
 # ╔═╡ 49d120ea-2699-11eb-203d-fddbb33bb08b
@@ -45,6 +46,13 @@ begin
     ncountries, ncols = size(data)
     ndays = ncols - 4
 end;
+
+# ╔═╡ b3307385-fc8d-4b0c-b4d9-f77a1e2a11ca
+md"""
+Here you can select the country you want to see.
+
+You can select multiple countries or all countries with `Cmd`+`A`.
+"""
 
 # ╔═╡ 1c4aec86-269a-11eb-2204-098352e8267c
 @bind countries MultiSelect(["Germany", "Austria", "Belgium", "Netherlands", "France", "Italy", "Spain", "US"], default=["Germany"])
@@ -79,5 +87,6 @@ plot(day, confirmed, xlim=(0, ndays+1), ylim=(10, 20_000_000), ylog=true,
 # ╠═4b5f800a-2699-11eb-2528-b5917c0461cf
 # ╠═75ad9770-2699-11eb-0db7-5948da39d6e1
 # ╠═86c70334-2699-11eb-1b52-cfa50b314e2b
+# ╠═b3307385-fc8d-4b0c-b4d9-f77a1e2a11ca
 # ╠═1c4aec86-269a-11eb-2204-098352e8267c
 # ╠═918f640a-2699-11eb-02d8-998ed76c614a
