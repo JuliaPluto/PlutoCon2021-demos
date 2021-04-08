@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.14.0
+# v0.14.1
 
 using Markdown
 using InteractiveUtils
@@ -15,7 +15,15 @@ end
 
 # ╔═╡ f07c3450-ef32-11ea-3f5f-2b0fc747ff80
 begin
-	using TheNumberLine, PlutoUI, Luxor; "✓"
+    import Pkg
+    Pkg.activate(mktempdir())
+    Pkg.add([
+        Pkg.PackageSpec(name="TheNumberLine", version="0.1"),
+        Pkg.PackageSpec(name="PlutoUI", version="0.7"),
+        Pkg.PackageSpec(name="Luxor", version="2"),
+    ])
+    using TheNumberLine, PlutoUI, Luxor
+	"✓"
 end
 
 # ╔═╡ 62e67a9c-ef25-11ea-3589-6f377d7aa788
