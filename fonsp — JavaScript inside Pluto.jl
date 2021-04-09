@@ -131,28 +131,28 @@ ClickCounter(text="Click") = @htl("""
 
 <script>
 
-// Select elements relative to `currentScript`
-var div = currentScript.parentElement
-var button = div.querySelector("button")
+	// Select elements relative to `currentScript`
+	var div = currentScript.parentElement
+	var button = div.querySelector("button")
 
-// we wrapped the button in a `div` to hide its default behaviour from Pluto
+	// we wrapped the button in a `div` to hide its default behaviour from Pluto
 
-var count = 0
+	var count = 0
 
-button.addEventListener("click", (e) => {
-	count += 1
-	
-	// we dispatch the input event on the div, not the button, because 
-	// Pluto's `@bind` mechanism listens for events on the **first element** in the
-	// HTML output. In our case, that's the div.
-	
+	button.addEventListener("click", (e) => {
+		count += 1
+
+		// we dispatch the input event on the div, not the button, because 
+		// Pluto's `@bind` mechanism listens for events on the **first element** in the
+		// HTML output. In our case, that's the div.
+
+		div.value = count
+		div.dispatchEvent(new CustomEvent("input"))
+		e.preventDefault()
+	})
+
+	// Set the initial value
 	div.value = count
-	div.dispatchEvent(new CustomEvent("input"))
-	e.stopPropagation()
-})
-
-// Set the initial value
-div.value = count
 
 </script>
 </div>
@@ -236,7 +236,7 @@ Let's look at the "wrapper div strategy" again.
 	<script>
 		var wrapper_div = currentScript.parentElement
 		// we can now use querySelector to select anything we want
-		var first_button = wrapper_dir.querySelector("button#first")
+		var first_button = wrapper_div.querySelector("button#first")
 
 		console.log(first_button)
 	</script>
@@ -333,15 +333,16 @@ You might be thinking, why don't we just use the `HTML` function, together with 
 """
 
 # ╔═╡ ef28eb8d-ec98-43e5-9012-3338c3b84f1b
-currencies = "euros&pounds"
+cool_elements = "<div> and <marquee>"
 
-# ╔═╡ ba5ea204-cea5-40cd-bbad-86f45d2ed80d
+# ╔═╡ 1ba370cc-3631-47ea-9db5-75587e8e4ff3
 HTML("""
-<h5> We accept $(currencies)!</h5>
-"""),
+<h6> My favourite HTML elements are $(cool_elements)!</h6>
+""")
 
+# ╔═╡ 7fcf2f3f-d902-4338-adf0-8ef181e79420
 @htl("""
-<h5> We accept $(currencies)!</h5>
+<h6> My favourite HTML elements are $(cool_elements)!</h6>
 """)
 
 # ╔═╡ 7afbf8ef-e91c-45b9-bf22-24201cbb4828
@@ -728,39 +729,39 @@ details(md"""
 
 # ╔═╡ b0c246ed-b871-461b-9541-280e49b49136
 details(md"""
-	```htmlmixed
-	<div>
-	<button>$(text)</button>
+```htmlmixed
+<div>
+<button>$(text)</button>
 
-	<script>
+<script>
 
-		// Select elements relative to `currentScript`
-		var div = currentScript.parentElement
-		var button = div.querySelector("button")
+	// Select elements relative to `currentScript`
+	var div = currentScript.parentElement
+	var button = div.querySelector("button")
 
-		// we wrapped the button in a `div` to hide its default behaviour from Pluto
+	// we wrapped the button in a `div` to hide its default behaviour from Pluto
 
-		var count = 0
+	var count = 0
 
-		button.addEventListener("click", (e) => {
-			count += 1
+	button.addEventListener("click", (e) => {
+		count += 1
 
-			// we dispatch the input event on the div, not the button, because 
-			// Pluto's `@bind` mechanism listens for events on the **first element** in the
-			// HTML output. In our case, that's the div.
+		// we dispatch the input event on the div, not the button, because 
+		// Pluto's `@bind` mechanism listens for events on the **first element** in the
+		// HTML output. In our case, that's the div.
 
-			div.value = count
-			div.dispatchEvent(new CustomEvent("input"))
-			e.stopPropagation()
-		})
-
-		// Set the initial value
 		div.value = count
+		div.dispatchEvent(new CustomEvent("input"))
+		e.preventDefault()
+	})
 
-	</script>
-	</div>
-	```
-	""", "Show with syntax highlighting")
+	// Set the initial value
+	div.value = count
+
+</script>
+</div>
+```
+""", "Show with syntax highlighting")
 
 # ╔═╡ 94561cb1-2325-49b6-8b22-943923fdd91b
 details(md"""
@@ -954,7 +955,8 @@ details(md"""
 # ╟─e7d3db79-8253-4cbd-9832-5afb7dff0abf
 # ╟─5ac5b984-8c02-4b8d-a342-d0f05f7909ec
 # ╠═ef28eb8d-ec98-43e5-9012-3338c3b84f1b
-# ╠═ba5ea204-cea5-40cd-bbad-86f45d2ed80d
+# ╠═1ba370cc-3631-47ea-9db5-75587e8e4ff3
+# ╠═7fcf2f3f-d902-4338-adf0-8ef181e79420
 # ╟─7afbf8ef-e91c-45b9-bf22-24201cbb4828
 # ╠═01ce31a9-6856-4ee7-8bce-7ce635167457
 # ╠═00d97588-d591-4dad-9f7d-223c237deefd
