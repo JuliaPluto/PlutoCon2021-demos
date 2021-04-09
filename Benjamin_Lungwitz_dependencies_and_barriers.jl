@@ -24,8 +24,15 @@ Reactivity is great!
 
 * ... (you probably know, because you are here!)
 
+"""
+
+# ╔═╡ f286571e-fab6-4cc4-bf23-000ffd4e68b5
+md"""
 **But why is my 10 minute-long calculation executed all over again ?!?**
 
+* Dependencies are not always obvious (and sometimes even accidential)
+
+* Maybe I do not want reactivity for this specific cell, because it takes too long to execute.
 """
 
 # ╔═╡ 056613b1-fc66-439f-a333-f86c9735535d
@@ -144,6 +151,7 @@ document.getElementById("dependencies").innerHTML = text;
 md"""
 ## Execution Barrier (WIP)
 
+Note: the following only works when using Pluto with this 
 [Draft Pull Request](https://github.com/fonsp/Pluto.jl/pull/985)
 """
 
@@ -212,8 +220,23 @@ md"""
 """
 
 # ╔═╡ b5de0179-a1c6-409a-bfc5-5e2ca100641e
-struct UML
-    code:: String
+begin
+	struct UML
+		code:: String
+	end
+	function Base.show(io::IO, ::MIME"text/html", uml::UML)
+		print(io, """
+		<!DOCTYPE html>
+		<body>
+			<div class="mermaid">
+				$(uml.code)
+			</div>
+			<script src="https://cdn.jsdelivr.net/npm/mermaid@8.9.1/dist/mermaid.min.js"></script>
+			<script>mermaid.initialize({startOnLoad:true});</script>
+		</body>
+		</html>
+		""")
+	end
 end
 
 # ╔═╡ 6581764c-2f28-49b3-803a-1008c7143cbb
@@ -228,25 +251,11 @@ b5de0 -- UML --> 65817
 b5de0 -- UML --> 467f8
 	""")
 
-# ╔═╡ 467f85f9-252f-4666-9d22-89c3ae4980b8
-function Base.show(io::IO, ::MIME"text/html", uml::UML)
-    print(io, """
-    <!DOCTYPE html>
-    <body>
-        <div class="mermaid">
-            $(uml.code)
-        </div>
-        <script src="https://cdn.jsdelivr.net/npm/mermaid@8.9.1/dist/mermaid.min.js"></script>
-        <script>mermaid.initialize({startOnLoad:true});</script>
-    </body>
-    </html>
-    """)
-end
-
 # ╔═╡ Cell order:
 # ╟─da13b180-97c4-11eb-257c-358495df9420
 # ╟─a54f1f83-60ad-411f-aa52-bbe4116e3b8d
 # ╟─5d39d078-2a89-422c-b1e4-4ccb26b77f32
+# ╟─f286571e-fab6-4cc4-bf23-000ffd4e68b5
 # ╟─056613b1-fc66-439f-a333-f86c9735535d
 # ╟─a866c509-3c98-41a5-bc4a-1ba6c97ae0e6
 # ╟─3fde6b14-bc4d-4c38-86d7-a5d0cba738df
@@ -270,4 +279,3 @@ end
 # ╠═94971c75-cf66-46a6-a64d-74c1901ce0bd
 # ╟─56124d79-b192-40dc-b6ba-a7e13b0a1764
 # ╠═b5de0179-a1c6-409a-bfc5-5e2ca100641e
-# ╠═467f85f9-252f-4666-9d22-89c3ae4980b8
