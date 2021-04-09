@@ -7,9 +7,13 @@ ignore_cache = [
     "index.jl",
 ]
 
+# the following notebooks are disabled because they are not working well. of course i want to fix this, but i will only have time after the conference... sorry!
 [SliderServer]
 exclude=[
     "index.jl",
     "Benjamin_Lungwitz_MarketRisk_time_series.jl",
     "Vikas Negi - Visualizing Samsung Health App Data.jl",
+    "Nick Bochenski - The Backstage of Reactivity.jl",
+    "David P. Sanders — Plotting inequalities using interval methods.pluto.jl",
+    "GiggleLiu-TropicalTensors.jl",
 ]
