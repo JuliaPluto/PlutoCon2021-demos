@@ -13,22 +13,92 @@ macro bind(def, element)
     end
 end
 
-# ╔═╡ 24bd1072-7fa4-4656-a485-c81991d3f1d9
-using PlutoUI
-
 # ╔═╡ 571613a1-6b4b-496d-9a68-aac3f6a83a4b
-using HypertextLiteral, JSON
+begin
+    import Pkg
+    Pkg.activate(mktempdir())
+    Pkg.add([
+        Pkg.PackageSpec(name="PlutoUI", version="0.7"),
+        Pkg.PackageSpec(name="HypertextLiteral", version="0.6"),
+        Pkg.PackageSpec(name="JSON", version="0.21"),
+    ])
+    using PlutoUI, HypertextLiteral, JSON
+end
 
 # ╔═╡ 97914842-76d2-11eb-0c48-a7eedca870fb
 md"""
 # Using _JavaScript_ inside Pluto
 
-You have already seen that Pluto is designed to be _interactive_. You can make fantastic explorable documents using just the basic inputs provided by PlutoUI, together with the diff
+You have already seen that Pluto is designed to be _interactive_. You can make fantastic explorable documents using just the basic inputs provided by PlutoUI, together with the wide range of visualization libraries that Julia offers.
+
+_However_, if you want to take your interactive document one step further, then Pluto offers a great framework for **combining Julia with HTML, CSS and _JavaScript_**.
 """
 
 # ╔═╡ 168e13f7-2ff2-4207-be56-e57755041d36
 md"""
-https://javascript.info/
+## Prerequisites
+
+This document assumes that you have used HTML, CSS and JavaScript before in another context. If you know Julia, and you want to add these web languages to your skillset, we encourage you to do so! It will be useful knowledge, also outside of Pluto.
+
+"""
+
+# ╔═╡ 28ae1424-67dc-4b76-a172-1185cc76cb59
+html"""
+
+<article class="learning">
+	<h4>
+		Learning HTML and CSS
+	</h4>
+	<p>
+		It is easy to learn HTML and CSS because they are not 'programming languages' like Julia and JavaScript, they are <em>markup languages</em>: there are no loops, functions or arrays, you only <em>declare</em> how your document is structured (HTML) and what that structure looks like on a 2D color display (CSS).
+	</p>
+	<p>
+		As an example, this is what this cell looks like, written in HTML and CSS:
+	</p>
+</article>
+
+
+<style>
+
+	article.learning {
+		background: #fde6ea9c;
+		padding: 1em;
+		border-radius: 5px;
+	}
+
+	article.learning h4::before {
+		content: "☝️";
+	}
+
+	article.learning p::first-letter {
+		font-size: 1.5em;
+		font-family: cursive;
+	}
+
+</style>
+"""
+
+# ╔═╡ ea39c63f-7466-4015-a66c-08bd9c716343
+md"""
+> My personal favourite resource for learning HTML and CSS is the [Mozilla Developer Network (MDN)](https://developer.mozilla.org/en-US/docs/Web/CSS). 
+> 
+> _-fons_
+"""
+
+# ╔═╡ 8b082f9a-073e-4112-9422-4087850fc89e
+md"""
+#### Learning JavaScript
+After learning HTML and CSS, you can already spice up your Pluto notebooks but creating custom layouts, generated dynamically from Julia data. To take things to the next level, you can learn JavaScript. We recommend using an online resource for this. 
+
+> My personal favourite is [javascript.info](https://javascript.info/), a high-quality, open source tutorial. I use it too!
+> 
+> _-fons_
+
+It is hard to say whether it is easy to _learn JavaScript using Pluto_. On one hand, we highly recommend the high-quality public learning material that already exists for JavaScript, which is generally written in the context of writing traditional web apps. On the other hand, if you have a specific Pluto-related project in mind, then this could be a great motivator to continue learning!
+
+A third option is to learn JavaScript using [observablehq.com](observablehq.com), an online reactive notebook for JavaScript (it's awesome!). Pluto's JavaScript runtime is designed to be very close to the way you write code in observable, so the skills you learn there will be transferable!
+
+If you chose to learn JavaScript using Pluto, let me know how it went, and how we can improve! [fons@plutojl.org](mailto:fons@plutojl.org)
 """
 
 # ╔═╡ d70a3a02-ef3a-450f-bf5a-4a0d7f6262e2
@@ -52,51 +122,7 @@ obj.dispatchEvent(new CustomEvent("input"))
 
 For example, here is a button widget that will send the number of times it has been clicked as the value:
 
-
-For better readability, you can view the script from the cell below with syntax highlighting: $(@bind show_cc_with_highlighting html"<input type=checkbox >")
-
 """
-
-# ╔═╡ bfe6d760-3141-4e37-a136-d1277bd22380
-if show_cc_with_highlighting === true
-	md"""
-	
-```htmlmixed
-ClickCounter(text="Click") = @htl(""\"
-<div>
-<button>$(text)</button>
-
-<script>
-
-// Select elements relative to `currentScript`
-var div = currentScript.parentElement
-var button = div.querySelector("button")
-
-// we wrapped the button in a `div` to hide its default behaviour from Pluto
-
-var count = 0
-
-button.addEventListener("click", (e) => {
-	count += 1
-	
-	// we dispatch the input event on the div, not the button, because 
-	// Pluto's `@bind` mechanism listens for events on the **first element** in the
-	// HTML output. In our case, that's the div.
-	
-	div.value = count
-	div.dispatchEvent(new CustomEvent("input"))
-	e.stopPropagation()
-})
-
-// Set the initial value
-div.value = count
-
-</script>
-</div>
-""\")
-```
-	"""
-end
 
 # ╔═╡ e8d8a60e-489b-467a-b49c-1fa844807751
 ClickCounter(text="Click") = @htl("""
@@ -412,14 +438,23 @@ md"""
 
 # ╔═╡ 4cf27df3-6a69-402e-a71c-26538b2a52e7
 md"""
-## Script output
-"""
+## Script output & `observablehq/stdlib`
 
-# ╔═╡ a9815586-1532-4fa1-bf79-905ff9de4e92
-cool_thing() = html"""
+Pluto's original inspiration was [observablehq.com](https://observablehq.com/), and online reactive notebook for JavaScript. _(It's REALLY good, try it out!)_ We design Pluto's JavaScript runtime to be close to the way you write code in observable.
 
+Read more about the observable runtime in their (interactive) [documentation](https://observablehq.com/@observablehq/observables-not-javascript). The following is also true for JavaScript-inside-scripts in Pluto:
+- ⭐️ If you return an HTML node, it will be displayed.
+- ⭐️ The [`observablehq/stdlib`](https://observablehq.com/@observablehq/standard-library) library is pre-imported, you can use `DOM`, `html`, `Promises`, etc.
+- ⭐️ When a cell re-runs reactively, `this` will be set to the previous output (with caveat, see the later section)
+- The variable `invalidation` is a Promise that will get resolved when the cell output is changed or removed. You can use this to remove event listeners, for example.
+- You can use top-level `await`, and a returned HTML node will be displayed when ready.
+- Code is run in "strict mode", use `let x = 1` instead of `x = 1`.
 
-
+The following is different in Pluto:
+- JavaScript code is not reactive, there are no global variables.
+- Cells can contain multiple script tags, and they will run consecutively (also when using `await`)
+- We do not (yet) support async generators, i.e. `yield`.
+- We do not support the observable keywords `viewof` and `mutable`.
 """
 
 # ╔═╡ 5721ad33-a51a-4a91-adb2-0915ea0efa13
@@ -427,9 +462,52 @@ md"""
 ### Example: 
 """
 
+# ╔═╡ 846354c8-ba3b-4be7-926c-d3c9cc9add5f
+films = [
+	(title="Frances Ha", director="Noah Baumbach", year=2012),
+	(title="Portrait de la jeune fille en feu", director="Céline Sciamma", year=2019),
+	(title="De noorderlingen", director="Alex van Warmerdam", year=1992),
+];
+
+# ╔═╡ c857bb4b-4cf4-426e-b340-592cf7700434
+@htl("""
+	<script>
+	
+	let data = $(JSON.json(films))
+	
+	// html`...` is from https://github.com/observablehq/stdlib
+	// note the escaped dollar signs:
+	let Film = ({title, director, year}) => html`
+		<li class="film">
+			<b>\${title}</b> by <em>\${director}</em> (\${year})
+		</li>
+	`
+	
+	// the returned HTML node is rendered
+	return html`
+		<ul>
+			\${data.map(Film)}
+		</ul>
+	`
+	
+	</script>
+	""")
+
 # ╔═╡ a33c7d7a-8071-448e-abd6-4e38b5444a3a
 md"""
 ## Stateful output with `this`
+
+Just like in observablehq, if a cell _re-runs reactively_, then the javascript variable `this` will take the value of the last thing that was returned by the script. If the cell runs for the first time, then `this == undefined`. In particular, if you return an HTML node, and the cell runs a second time, then you can access the HTML node using `this`. Two reasons for using this feature are:
+- Stateful output: you can persist some state inbetween re-renders. 
+- Performance: you can 'recycle' the previous DOM and update it partially (using d3, for example). _When doing so, Pluto guarantees that the DOM node will always be visible, without flicker._
+
+##### 'Re-runs reactively'?
+With this, we mean that the Julia cell re-runs not because of user input (Ctrl+S, Shift+Enter or clicking the play button), but because it was triggered by a variable reference.
+
+##### ☝️ Caveat
+This feature is **only enabled** for `<script>` tags with the `id` attribute set, e.g. `<script id="first">`. Think of setting the `id` attribute as saying: "I am a Pluto script". There are two reasons for this:
+- One Pluto cell can output multiple scripts, Pluto needs to know which output to assign to which script.
+- Some existing scripts assume that `this` is set to `window` in toplevel code (like in the browser). By hiding the `this`-feature behind this caveat, we still support libraries that output such scripts.
 
 """
 
@@ -442,6 +520,8 @@ let
 	
 	html"""
 	<script id="something">
+	
+	console.log("'this' is currently:", this)
 
 	if(this == null) {
 		return html`<blockquote>I am running for the first time!</blockqoute>`
@@ -508,25 +588,351 @@ return output
 
 """)
 
-# ╔═╡ 53512329-523b-4b45-b222-1b982f49d5db
+# ╔═╡ 781adedc-2da7-4394-b323-e508d614afae
+md"""
+### Example: Preact with persistent state
+"""
+
+# ╔═╡ de789ad1-8197-48ae-81b2-a21ec2340ae0
+md"""
+Modify `x`, add and remove elements, and notice that preact maintains its state.
+"""
+
+# ╔═╡ 85483b28-341e-4ed6-bb1e-66c33613725e
+x = ["hello pluton!", 232000,2,2,12 ,12,2,21,1,2, 120000]
+
+# ╔═╡ 3266f9e6-42ad-4103-8db3-b87d2c315290
+state = Dict(
+	:x => x
+	)
+
+# ╔═╡ 9e37c18c-3ebb-443a-9663-bb4064391d6e
+@htl("""
+<script type="module" id="asdf">
+	//await new Promise(r => setTimeout(r, 1000))
+	
+	const { html, render, Component, useEffect, useLayoutEffect, useState, useRef, useMemo, createContext, useContext, } = await import( "https://cdn.jsdelivr.net/npm/htm@3.0.4/preact/standalone.mjs")
+
+	const node = this ?? document.createElement("div")
+	
+	const new_state = $(json(state))
+	
+	if(this == null){
+	
+		// PREACT APP STARTS HERE
+		
+		const Item = ({value}) => {
+			const [loading, set_loading] = useState(true)
+
+			useEffect(() => {
+				set_loading(true)
+
+				const handle = setTimeout(() => {
+					set_loading(false)
+				}, 1000)
+
+				return () => clearTimeout(handle)
+			}, [value])
+
+			return html`<li>\${loading ? 
+				html`<em>Loading...</em>` : 
+				value
+			}</li>`
+		}
+
+        const App = () => {
+
+            const [state, set_state] = useState(new_state)
+            node.set_app_state = set_state
+
+            return html`<h5>Hello world!</h5>
+                <ul>\${
+                state.x.map((x,i) => html`<\${Item} value=\${x} key=\${i}/>`)
+            }</ul>`;
+        }
+
+		// PREACT APP ENDS HERE
+
+        render(html`<\${App}/>`, node);
+	
+	} else {
+		
+		node.set_app_state(new_state)
+	}
+	return node
+</script>
+	
+	
+""")
+
+# ╔═╡ ebec177c-4c33-45a4-bdbd-f16944631aff
+md"""
+## Manipulate the editor itself
 
 
-# ╔═╡ 91e9a6dc-b970-4c83-b2b9-dfaff706c28c
-script(s) = HTML("""
-	<script id="something">
-	$s
-	</script>
+"""
+
+# ╔═╡ cc318a19-316f-4fd9-8436-fb1d42f888a3
+
+
+# ╔═╡ da7091f5-8ba2-498b-aa8d-bbf3b4505b81
+md"""
+# Appendix
+"""
+
+# ╔═╡ 64cbf19c-a4e3-4cdb-b4ec-1fbe24be55ad
+details(x, summary="Show more") = @htl("""
+	<details>
+		<summary>$(summary)</summary>
+		$(x)
+	</details>
 	""")
+
+# ╔═╡ 93abe0dc-f041-475f-9ef7-d8ee4408414b
+details(md"""
+	```htmlmixed
+	
+	<article class="learning">
+		<h4>
+			Learning HTML and CSS
+		</h4>
+		<p>
+			It is easy to learn HTML and CSS because they are not 'programming languages' like Julia and JavaScript, they are <em>markup languages</em>: there are no loops, functions or arrays, you only <em>declare</em> how your document is structured (HTML) and what that structure looks like on a 2D color display (CSS).
+		</p>
+		<p>
+			As an example, this is what this cell looks like, written in HTML and CSS:
+		</p>
+	</article>
+
+
+	<style>
+
+		article.learning {
+			background: #fde6ea9c;
+			padding: 1em;
+			border-radius: 5px;
+		}
+
+		article.learning h4::before {
+			content: "☝️";
+		}
+
+		article.learning p::first-letter {
+			font-size: 1.5em;
+			font-family: cursive;
+		}
+
+	</style>
+	```
+	""", "Show with syntax highlighting")
+
+# ╔═╡ b0c246ed-b871-461b-9541-280e49b49136
+details(md"""
+	```htmlmixed
+	<div>
+	<button>$(text)</button>
+
+	<script>
+
+		// Select elements relative to `currentScript`
+		var div = currentScript.parentElement
+		var button = div.querySelector("button")
+
+		// we wrapped the button in a `div` to hide its default behaviour from Pluto
+
+		var count = 0
+
+		button.addEventListener("click", (e) => {
+			count += 1
+
+			// we dispatch the input event on the div, not the button, because 
+			// Pluto's `@bind` mechanism listens for events on the **first element** in the
+			// HTML output. In our case, that's the div.
+
+			div.value = count
+			div.dispatchEvent(new CustomEvent("input"))
+			e.stopPropagation()
+		})
+
+		// Set the initial value
+		div.value = count
+
+	</script>
+	</div>
+	```
+	""", "Show with syntax highlighting")
+
+# ╔═╡ 94561cb1-2325-49b6-8b22-943923fdd91b
+details(md"""
+	```htmlmixed
+	<script src="https://cdn.jsdelivr.net/npm/d3@6.2.0/dist/d3.min.js"></script>
+
+	<script>
+
+	// interpolate the data 🐸
+	const data = $(JSON.json(my_data))
+
+	const svg = DOM.svg(600,200)
+	const s = d3.select(svg)
+
+	s.selectAll("text")
+		.data(data)
+		.join("text")
+		.attr("x", d => d.coordinate[0])
+		.attr("y", d => d.coordinate[1])
+		.text(d => d.name)
+
+	return svg
+	</script>
+	```
+	""", "Show with syntax highlighting")
+
+# ╔═╡ d121e085-c69b-490f-b315-c11a9abd57a6
+details(md"""
+	```htmlmixed
+	<script>
+	
+	let data = $(JSON.json(films))
+	
+	// html`...` is from https://github.com/observablehq/stdlib
+	// note the escaped dollar signs:
+	let Film = ({title, director, year}) => html`
+		<li class="film">
+			<b>\${title}</b> by <em>\${director}</em> (\${year})
+		</li>
+	`
+	
+	// the returned HTML node is rendered
+	return html`
+		<ul>
+			\${data.map(Film)}
+		</ul>
+	`
+	
+	</script>
+	```
+	""", "Show with syntax highlighting")
+
+# ╔═╡ d4bdc4fe-2af8-402f-950f-2afaf77c62de
+details(md"""
+	```htmlmixed
+	<script id="something">
+	
+	console.log("'this' is currently:", this)
+
+	if(this == null) {
+		return html`<blockquote>I am running for the first time!</blockqoute>`
+	} else {
+		return html`<blockquote><b>I was triggered by reactivity!</b></blockqoute>`
+	}
+
+
+	</script>
+	```
+	""", "Show with syntax highlighting")
+
+# ╔═╡ e910982c-8508-4729-a75d-8b5b847918b6
+details(md"""
+	```htmlmixed
+	<script src="https://cdn.jsdelivr.net/npm/d3@6.2.0/dist/d3.min.js"></script>
+
+	<script id="hello">
+
+	const positions = $(JSON.json(dot_positions))
+
+	const svg = this == null ? DOM.svg(600,200) : this
+	const s = this == null ? d3.select(svg) : this.s
+
+	s.selectAll("circle")
+		.data(positions)
+		.join("circle")
+		.transition()
+		.duration(300)
+		.attr("cx", d => d)
+		.attr("cy", 100)
+		.attr("r", 10)
+		.attr("fill", "gray")
+
+
+	const output = svg
+	output.s = s
+	return output
+	</script>
+	```
+	""", "Show with syntax highlighting")
+
+# ╔═╡ 05d28aa2-9622-4e62-ab39-ca4c7dde6eb4
+details(md"""
+	```htmlmixed
+	<script type="module" id="asdf">
+		//await new Promise(r => setTimeout(r, 1000))
+
+		const { html, render, Component, useEffect, useLayoutEffect, useState, useRef, useMemo, createContext, useContext, } = await import( "https://cdn.jsdelivr.net/npm/htm@3.0.4/preact/standalone.mjs")
+
+		const node = this ?? document.createElement("div")
+
+		const new_state = $(json(state))
+
+		if(this == null){
+
+			// PREACT APP STARTS HERE
+
+			const Item = ({value}) => {
+				const [loading, set_loading] = useState(true)
+
+				useEffect(() => {
+					set_loading(true)
+
+					const handle = setTimeout(() => {
+						set_loading(false)
+					}, 1000)
+
+					return () => clearTimeout(handle)
+				}, [value])
+
+				return html`<li>\${loading ? 
+					html`<em>Loading...</em>` : 
+					value
+				}</li>`
+			}
+
+			const App = () => {
+
+				const [state, set_state] = useState(new_state)
+				node.set_app_state = set_state
+
+				return html`<h5>Hello world!</h5>
+					<ul>\${
+					state.x.map((x,i) => html`<\${Item} value=\${x} key=\${i}/>`)
+				}</ul>`;
+			}
+
+			// PREACT APP ENDS HERE
+
+			render(html`<\${App}/>`, node);
+
+		} else {
+
+			node.set_app_state(new_state)
+		}
+		return node
+	</script>
+	```
+	""", "Show with syntax highlighting")
 
 # ╔═╡ Cell order:
 # ╟─97914842-76d2-11eb-0c48-a7eedca870fb
-# ╠═168e13f7-2ff2-4207-be56-e57755041d36
-# ╠═24bd1072-7fa4-4656-a485-c81991d3f1d9
+# ╠═571613a1-6b4b-496d-9a68-aac3f6a83a4b
+# ╟─168e13f7-2ff2-4207-be56-e57755041d36
+# ╠═28ae1424-67dc-4b76-a172-1185cc76cb59
+# ╟─93abe0dc-f041-475f-9ef7-d8ee4408414b
+# ╟─ea39c63f-7466-4015-a66c-08bd9c716343
+# ╟─8b082f9a-073e-4112-9422-4087850fc89e
 # ╟─d70a3a02-ef3a-450f-bf5a-4a0d7f6262e2
 # ╟─5c5d2489-e48b-432f-94f8-b15333134e24
 # ╟─75e1a973-7ef0-4ac5-b3e2-5edb63577927
-# ╟─bfe6d760-3141-4e37-a136-d1277bd22380
 # ╠═e8d8a60e-489b-467a-b49c-1fa844807751
+# ╟─b0c246ed-b871-461b-9541-280e49b49136
 # ╠═9346d8e2-9ba0-4475-a21f-11bdd018bc60
 # ╠═7822fdb7-bee6-40cc-a089-56bb32d77fe6
 # ╟─701de4b8-42d3-46a3-a399-d7761dccd83d
@@ -553,22 +959,34 @@ script(s) = HTML("""
 # ╠═01ce31a9-6856-4ee7-8bce-7ce635167457
 # ╠═00d97588-d591-4dad-9f7d-223c237deefd
 # ╠═21f57310-9ceb-423c-a9ce-5beb1060a5a3
+# ╟─94561cb1-2325-49b6-8b22-943923fdd91b
 # ╟─d83d57e2-4787-4b8d-8669-64ed73d79e73
 # ╠═27e4604c-5954-44b7-a348-1650dbc6d8a9
 # ╟─077c95cf-2a1b-459f-830e-c29c11a2c5cc
 # ╟─8388a833-d535-4cbd-a27b-de323cea60e8
-# ╠═4cf27df3-6a69-402e-a71c-26538b2a52e7
-# ╠═a9815586-1532-4fa1-bf79-905ff9de4e92
-# ╠═5721ad33-a51a-4a91-adb2-0915ea0efa13
-# ╠═a33c7d7a-8071-448e-abd6-4e38b5444a3a
+# ╟─4cf27df3-6a69-402e-a71c-26538b2a52e7
+# ╟─5721ad33-a51a-4a91-adb2-0915ea0efa13
+# ╠═c857bb4b-4cf4-426e-b340-592cf7700434
+# ╟─d121e085-c69b-490f-b315-c11a9abd57a6
+# ╠═846354c8-ba3b-4be7-926c-d3c9cc9add5f
+# ╟─a33c7d7a-8071-448e-abd6-4e38b5444a3a
 # ╠═91f3dab8-5521-44a0-9890-8d988a994076
 # ╠═dcaae662-4a4f-4dd3-8763-89ea9eab7d43
+# ╟─d4bdc4fe-2af8-402f-950f-2afaf77c62de
 # ╟─e77cfefc-429d-49db-8135-f4604f6a9f0b
 # ╠═2d5689f5-1d63-4b8b-a103-da35933ad26e
 # ╠═6dd221d1-7fd8-446e-aced-950512ea34bc
 # ╠═0a9d6e2d-3a41-4cd5-9a4e-a9b76ed89fa9
 # ╟─0962d456-1a76-4b0d-85ff-c9e7dc66621d
 # ╠═bf9b36e8-14c5-477b-a54b-35ba8e415c77
-# ╠═53512329-523b-4b45-b222-1b982f49d5db
-# ╠═91e9a6dc-b970-4c83-b2b9-dfaff706c28c
-# ╠═571613a1-6b4b-496d-9a68-aac3f6a83a4b
+# ╟─e910982c-8508-4729-a75d-8b5b847918b6
+# ╟─781adedc-2da7-4394-b323-e508d614afae
+# ╟─de789ad1-8197-48ae-81b2-a21ec2340ae0
+# ╠═85483b28-341e-4ed6-bb1e-66c33613725e
+# ╠═9e37c18c-3ebb-443a-9663-bb4064391d6e
+# ╟─05d28aa2-9622-4e62-ab39-ca4c7dde6eb4
+# ╠═3266f9e6-42ad-4103-8db3-b87d2c315290
+# ╠═ebec177c-4c33-45a4-bdbd-f16944631aff
+# ╠═cc318a19-316f-4fd9-8436-fb1d42f888a3
+# ╟─da7091f5-8ba2-498b-aa8d-bbf3b4505b81
+# ╠═64cbf19c-a4e3-4cdb-b4ec-1fbe24be55ad
