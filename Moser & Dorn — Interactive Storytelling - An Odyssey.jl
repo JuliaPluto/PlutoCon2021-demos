@@ -21,9 +21,10 @@ begin
         Pkg.PackageSpec(name="Plots", version="1"),
         Pkg.PackageSpec(name="StatsBase", version="0.33"),
         Pkg.PackageSpec(name="PlutoUI", version="0.7"),
+        Pkg.PackageSpec(name="HypertextLiteral", version="0.6"),
     ])
-    using Plots, Random, StatsBase, PlutoUI, LinearAlgebra, SparseArrays, Markdown, InteractiveUtils
-	md"Packages"
+    using Plots, Random, StatsBase, PlutoUI, LinearAlgebra, SparseArrays, Markdown, InteractiveUtils, HypertextLiteral
+    md"Packages"
 end
 
 # ╔═╡ f36826be-93cd-11eb-3cd4-278a16171c91
@@ -56,6 +57,13 @@ html"""<div style="display: flex; justify-content: center;">
 <div  notthestyle="position: relative; right: 0; top: 0; z-index: 300;">
 <iframe src="https://www.youtube.com/embed/gTWU6JFHxXg" width=600 height=375  frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 </div>"""
+
+# ╔═╡ c6f9c954-54c4-48ce-8465-fc85202b79f4
+begin
+	
+	md"""Switch to the next 8 days 📅 by clicking the up 🔼 button: 👉 $(@bind dial NumberField(0:8; default=0))"""
+	#md"""$(@bind dial ClickCounterWithReset("Dial!", "Start over!"))"""
+end
 
 # ╔═╡ 89c46920-7ed0-11eb-3c5f-574d525a9f1f
 md" Here again you can see our compass 🧭! Now you can change the probabilities by increasing the number next to the directions ⬅⬆➡⬇ and thus simulate wind or currents. Let's see how this might affect our journey!
@@ -220,12 +228,76 @@ bayes = "https://raw.githubusercontent.com/Captain-Bayes/images/main/bayes_50px.
 end
 
 # ╔═╡ 1aa40340-9382-11eb-1031-5fa5b0f133ee
-md" ## Welcome 
+begin
+local	rng1 = MersenneTwister(32) #seperate rng so that it won't actualize again when you're further down
+	dir_index = 5 .-sum(rand(rng1, 1, 8).<=cumsum([0.25, 0.25, 0.25, 0.25]), dims = 1)
+local	K_start = [sum(dir_index[1:j] .== i) for i in 1:4, j in 1:8]
+	pos_start = [0 0; K_start[1,:] - K_start[3,:] K_start[2,:] - K_start[4,:]]
+	
+	dial_index = Integer(round(dial,digits=0))
+	
+	md" ## Welcome 
 to this random journey! Each day we choose the sailing direction randomly. Hmm, let us try to use my famous random compass for this navigation! 
 
-Can you help me dial? Click the button below, and see what happens! 
-
+Can you help me with the dial process? Just switch to the next days by clicking the up button 🔼, and see what happens!
+	
 $(Resource(bayes, :width => 200))"
+	#Can you help me with to dial? Click the button below, and see what happens! 
+	
+end
+
+# ╔═╡ 5d25f3a0-93a4-11eb-3da6-c96ae54a0d70
+begin
+	
+	if dial_index > 0 && dial_index < 9
+		
+	lim_start = maximum(abs.(pos_start[:]))
+	plot(
+			pos_start[1:dial_index+1,1], pos_start[1:dial_index+1,2], 
+			linecolor   = :green,
+			linealpha = 0.2,
+			linewidth = 2, aspect_ratio =:equal,
+			marker = (:dot , 5, 0.2, :green),
+			label=false,
+			xlim =[-lim_start, lim_start],
+		    ylim =[-lim_start, lim_start],
+			legend = :bottom
+			)
+	plot!(
+			[0],[0],
+			marker = (:dot, 10, 1.0, :red),
+			label = "initial position"
+			)
+
+	plot!(
+			[pos_start[dial_index+1,1]], [pos_start[dial_index+1,2]],
+			marker = (:circle, 10, 1.0, :green),
+			label = "current position"
+			)
+	
+	end
+end
+
+# ╔═╡ 38fd06d0-93cc-11eb-030e-a7888d7d7eee
+begin
+#dial first steps
+
+
+local dir = ["E", "N", "W",  "S"]
+local word = [ "east", "north", "west" ,"south"]
+local url = ["https://raw.githubusercontent.com/Captain-Bayes/images/main/Kompass_east-export.gif", "https://raw.githubusercontent.com/Captain-Bayes/images/main/Kompass_north-export.gif",  "https://raw.githubusercontent.com/Captain-Bayes/images/main/Kompass_west-export.gif",  "https://raw.githubusercontent.com/Captain-Bayes/images/main/Kompass_south-export.gif"]
+
+		
+if dial_index < 8	&& dial_index > 0
+	md"Well done! The compass needle landed on **$(dir[dir_index[dial_index]])**. Seems like we'll be heading **$(word[dir_index[dial_index]])wards** today! $(Resource(url[dir_index[dial_index]], :width => 200))"
+elseif dial_index >= 8
+		md"""
+		$(Resource(ernesto_short, :width => 30))
+		
+		**Thank you for helping Captain Bayes dial the compass! From now on, she can handle it on her own. Scroll down further to see the whole journey of our crew. You can also change the seed to see different possible journeys!** """
+	end
+		
+end
 
 # ╔═╡ 9d9726dd-3456-4988-ae96-c25129092c39
 md"""
@@ -306,8 +378,8 @@ Can you show me the cummulative probabilities and where we might be after one ye
 # ╔═╡ e130ac04-e3eb-4be5-ae6c-c87eaf7064a5
 begin
 	days_max_first_journey = 200
-	days_max = 1000
-	n_reps_max = 20000
+	days_max = 400
+	n_reps_max = 2000
 	days_slider = @bind days Slider(1:1:days_max_first_journey, show_value = true, default = 100)
 	days_slider_2 = @bind days_2 Slider(1:25:days_max, show_value = true, default = 100)
 	seed_slider = @bind seed NumberField(1:100, default = 20)
@@ -375,6 +447,13 @@ hide_everything_below =
 	""";
 	
 md"definition hide everything below"
+end
+
+# ╔═╡ 4f304620-93cb-11eb-1da6-739664f2a105
+begin
+	if dial < 8
+			hide_everything_below
+	end
 end
 
 # ╔═╡ 81cfef50-93d4-11eb-3448-975c908bd1a2
@@ -624,6 +703,18 @@ weights = [n, E/norm, S/norm, W/norm]
 	md"variables"
 end
 
+# ╔═╡ 5cea77d0-93d1-11eb-1508-aff9495e46d8
+begin
+	dial
+if length(first_steps_x) < 7
+md"""
+## One journey (hidden)"""
+	else
+		md"""
+## One journey"""
+end
+end
+
 # ╔═╡ 5b711a00-6d8c-11eb-00ac-4dd20bc3dcc6
 begin
 	max_x_1_run = maximum(abs.(pos_first_run[1:days,1]))
@@ -740,90 +831,6 @@ button.addEventListener("click", (e) => {
 div.value = count
 </script>
 """)
-
-# ╔═╡ c6f9c954-54c4-48ce-8465-fc85202b79f4
-begin
-	rng1 = MersenneTwister(1) #seperate rng so that it won't actualize again when you're further down
-	dir_index = 5 .-sum(rand(rng1, 1, 8).<=cumsum([0.25, 0.25, 0.25, 0.25]), dims = 1)
-	md"""$(@bind dial ClickCounterWithReset("Dial!", "Start over!"))"""
-end
-
-# ╔═╡ 38fd06d0-93cc-11eb-030e-a7888d7d7eee
-begin
-#dial first steps
-
-local x_pos = [0, 1, 0, -1]
-local y_pos = [1, 0, -1, 0]
-local steps_x = zeros(8)
-local steps_y  = zeros(8)
-	for i in 1:7
-		steps_x[i+1] = x_pos[dir_index[i]]
-		steps_y[i+1] = y_pos[dir_index[i]]
-	end
-x_pos1 = cumsum(steps_x)
-y_pos1 = cumsum(steps_y)
-local dir = ["N", "E", "S", "W"]
-local word = ["north", "east", "south", "west"]
-local url = ["https://raw.githubusercontent.com/Captain-Bayes/images/main/Kompass_north-export.gif", "https://raw.githubusercontent.com/Captain-Bayes/images/main/Kompass_east-export.gif", "https://raw.githubusercontent.com/Captain-Bayes/images/main/Kompass_south-export.gif",  "https://raw.githubusercontent.com/Captain-Bayes/images/main/Kompass_west-export.gif"]
-
-		
-if dial < 8	&& dial > 0
-	md"Well done! The compass landed on $(dir[dir_index[dial]]). Seems like we'll be heading $(word[dir_index[dial]])wards today! $(Resource(url[dir_index[dial]], :width => 200))"
-elseif dial >= 8
-		md"""
-		$(Resource(ernesto_short, :width => 30))
-		
-		**Thank you for helping Captain Bayes dial the compass! From now on, she can handle it on her own. Scroll down further to see the whole journey of our crew. You can also change the seed to see different possible journeys!** """
-	end
-		
-end
-
-# ╔═╡ 5d25f3a0-93a4-11eb-3da6-c96ae54a0d70
-begin
-	if dial > 0
-
-	plot(
-			x_pos1[1:min(8,dial+1)], y_pos1[1:min(8,dial+1)], linecolor   = :green,
-			linealpha = 0.2,
-			linewidth = 2, aspect_ratio =:equal,
-			marker = (:dot , 5, 0.2, :green),
-			label=false,
-			xlim =[minimum([-5, minimum(x_pos1)]), maximum([5, maximum(x_pos1)])],
-		ylim =[minimum([-5, minimum(y_pos1)]), maximum([5, maximum(y_pos1)])]
-			)
-	plot!(
-			[0],[0],
-			marker = (:dot, 10, 1.0, :red),
-			label = "initial position"
-			)
-
-	plot!(
-			[x_pos1[min(8,dial+1)]], [y_pos1[min(8,dial+1)]],
-			marker = (:circle, 10, 1.0, :green),
-			label = "current position"
-			)
-	
-	end
-end
-
-# ╔═╡ 4f304620-93cb-11eb-1da6-739664f2a105
-begin
-	if dial < 8
-			hide_everything_below
-	end
-end
-
-# ╔═╡ 5cea77d0-93d1-11eb-1508-aff9495e46d8
-begin
-	dial
-if length(first_steps_x) < 7
-md"""
-## One journey (hidden)"""
-	else
-		md"""
-## One journey"""
-end
-end
 
 # ╔═╡ 8e804243-9123-497d-a4b2-552f04c1d9d5
 begin
