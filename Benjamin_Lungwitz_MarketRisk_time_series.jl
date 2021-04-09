@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.14.1
+# v0.14.0
 
 using Markdown
 using InteractiveUtils
@@ -176,7 +176,7 @@ Calculate VaR Time Series?
 """
 
 # ╔═╡ d786581e-54e2-11eb-0a84-bdaae4eb3409
-@bind calc_var_ts CheckBox(default=true)
+@bind calc_var_ts CheckBox(default=false)
 
 # ╔═╡ c359b3b0-54e2-11eb-0fef-8541745a702e
 md"""
