@@ -250,61 +250,64 @@ Fetching cell dependency data for UML diagram
 """
 
 # ╔═╡ e63de887-1b7b-45b0-8b8c-a2006d4608b4
-"""
-<div>
-	graph LR
-	<p id="dependencies"></p>
-</div>
+# """
+# <div>
+# 	graph LR
+# 	<p id="dependencies"></p>
+# </div>
 
-<script>
-function short_uuid(uuid) {return uuid.substring(0,5)}
-function validate(text)
-{
-    var isValid=false;
-	var i=0;
-    if(text != null && text.length>0 && text !='' )
-    {
-        isValid=true;
-        for (i=0;i<text.length;++i)
-        {
-            if(text.charCodeAt(i)>=128)
-            {
-                isValid=false;
-            }
-        }
+# <script>
+# function short_uuid(uuid) {return uuid.substring(0,5)}
+# function validate(text)
+# {
+#     var isValid=false;
+# 	var i=0;
+#     if(text != null && text.length>0 && text !='' )
+#     {
+#         isValid=true;
+#         for (i=0;i<text.length;++i)
+#         {
+#             if(text.charCodeAt(i)>=128)
+#             {
+#                 isValid=false;
+#             }
+#         }
 
-    }
-    return isValid;
-}
+#     }
+#     return isValid;
+# }
 
-var i;
-var text = "";
-var uuid;
-var uuid_s;
-var cell;
-var references;
-for (i = 0; i < editor_state.notebook.cell_execution_order.length; i++) {
-	uuid = editor_state.notebook.cell_execution_order[i];
-	uuid_s = short_uuid(uuid) 
-    cell =  editor_state.notebook.cell_dependencies[uuid];
-    references = cell.downstream_cells_map;
+# var i;
+# var text = "";
+# var uuid;
+# var uuid_s;
+# var cell;
+# var references;
+# for (i = 0; i < editor_state.notebook.cell_execution_order.length; i++) {
+# 	uuid = editor_state.notebook.cell_execution_order[i];
+# 	uuid_s = short_uuid(uuid) 
+#     cell =  editor_state.notebook.cell_dependencies[uuid];
+#     references = cell.downstream_cells_map;
 
-    if (references) {
-		Object.keys(references).forEach(function(ref_var) {
-			Object.values(references[ref_var]).forEach(function(ref_cell) {
-				if(validate(ref_var)) {
-					text += uuid_s + " -- " + ref_var + " --> " + short_uuid(ref_cell) + "<br/>";
-				} else {
-					text += uuid_s + " --> " + short_uuid(ref_cell) + "<br/>";
-				}
-			})
-		})
-	};    
+#     if (references) {
+# 		Object.keys(references).forEach(function(ref_var) {
+# 			Object.values(references[ref_var]).forEach(function(ref_cell) {
+# 				if(validate(ref_var)) {
+# 					text += uuid_s + " -- " + ref_var + " --> " + short_uuid(ref_cell) + "<br/>";
+# 				} else {
+# 					text += uuid_s + " --> " + short_uuid(ref_cell) + "<br/>";
+# 				}
+# 			})
+# 		})
+# 	};    
   
-};
+# };
 
-document.getElementById("dependencies").innerHTML = text;
-</script>""" |> HTML
+# document.getElementById("dependencies").innerHTML = text;
+# </script>""" |> HTML
+
+# ╔═╡ 8f3ee9fc-495d-4fa1-b2b6-28217ed2f21f
+
 
 # ╔═╡ Cell order:
 # ╟─da13b180-97c4-11eb-257c-358495df9420
@@ -342,4 +345,5 @@ document.getElementById("dependencies").innerHTML = text;
 # ╟─b8821d93-4b0f-4575-a461-f0f20935869b
 # ╠═b5de0179-a1c6-409a-bfc5-5e2ca100641e
 # ╟─384cfb77-5512-4c86-ba4f-f1adca727bf0
-# ╟─e63de887-1b7b-45b0-8b8c-a2006d4608b4
+# ╠═e63de887-1b7b-45b0-8b8c-a2006d4608b4
+# ╠═8f3ee9fc-495d-4fa1-b2b6-28217ed2f21f
