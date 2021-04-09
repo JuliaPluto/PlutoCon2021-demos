@@ -1,12 +1,45 @@
-Œ¥bonds€¬cell_results‰Ù$4b5f800a-2699-11eb-2528-b5917c0461cf†¦queuedÂ§runningÂ¦output…¤body °persist_js_stateÂ¤mimeªtext/plain²last_run_timestampËAØÛRn¬rootassigneeÀ§cell_idÙ$4b5f800a-2699-11eb-2528-b5917c0461cf§runtimeÎ"#8É§erroredÂÙ$b3307385-fc8d-4b0c-b4d9-f77a1e2a11ca†¦queuedÂ§runningÂ¦output…¤bodyÙ¸<div class="markdown"><p>Here you can select the country you want to see.</p>
-<p>You can select multiple countries or all countries with <code>Cmd</code>&#43;<code>A</code>.</p>
-</div>°persist_js_stateÂ¤mime©text/html²last_run_timestampËAØ×„â¬rootassigneeÀ§cell_idÙ$b3307385-fc8d-4b0c-b4d9-f77a1e2a11ca§runtimeÍ§erroredÂÙ$75ad9770-2699-11eb-0db7-5948da39d6e1†¦queuedÂ§runningÂ¦output…¤body °persist_js_stateÂ¤mimeªtext/plain²last_run_timestampËAØÛM7µ¬rootassigneeÀ§cell_idÙ$75ad9770-2699-11eb-0db7-5948da39d6e1§runtimeÎ,©§erroredÂÙ$49d120ea-2699-11eb-203d-fddbb33bb08b†¦queuedÂ§runningÂ¦output…¤body °persist_js_stateÂ¤mimeªtext/plain²last_run_timestampËAØÚÍ1¥¬rootassigneeÀ§cell_idÙ$49d120ea-2699-11eb-203d-fddbb33bb08b§runtimeÎ¾ı²§erroredÂÙ$e2d1cb38-2698-11eb-2e59-632faa201d6f†¦queuedÂ§runningÂ¦output…¤bodyÙa<script type="text/javascript" src=" https://gr-framework.org/downloads/gr-latest.js "></script>
-°persist_js_stateÂ¤mime©text/html²last_run_timestampËAØÚ†Y:¬rootassigneeÀ§cell_idÙ$e2d1cb38-2698-11eb-2e59-632faa201d6f§runtimeÎ:*Qn§erroredÂÙ$b2107723-4ff8-4d0f-84b2-4051f8ff48f5†¦queuedÂ§runningÂ¦output…¤bodyÚÆ<div class="markdown"><h2>Plotting confirmed SARSâ€“CoVâ€“2 infections</h2>
-<h3>Author: <a href="https://github.com/jheinen">Josef Heinen</a></h3>
-<h4>Required packages: PlutoUI, GR</h4>
-<p>You may have to comment out the Pluto part, if you are running the script on a remote web server. If you are running the script in a local notebook server, you will be able to pan/zoom the plot and display information when hovering over the data points.</p>
-</div>°persist_js_stateÂ¤mime©text/html²last_run_timestampËAØ×„Ôx¬rootassigneeÀ§cell_idÙ$b2107723-4ff8-4d0f-84b2-4051f8ff48f5§runtimeÍ18§erroredÂÙ$86c70334-2699-11eb-1b52-cfa50b314e2b†¦queuedÂ§runningÂ¦output…¤body °persist_js_stateÂ¤mimeªtext/plain²last_run_timestampËAØÛh)¦¬rootassigneeÀ§cell_idÙ$86c70334-2699-11eb-1b52-cfa50b314e2b§runtimeÎ
->–§erroredÂÙ$918f640a-2699-11eb-02d8-998ed76c614a†¦queuedÂ§runningÂ¦output…¤bodyÚ<div id="jsterm-display-785b5b35-48f0-41fc-a92d-bd454da7a728">
+Œ±cell_dependencies‰Ù$e2d1cb38-2698-11eb-2e59-632faa201d6f„´precedence_heuristic§cell_idÙ$e2d1cb38-2698-11eb-2e59-632faa201d6f´downstream_cells_mapƒ¢GR‘Ù$e2d1cb38-2698-11eb-2e59-632faa201d6f®DelimitedFiles§PlutoUI²upstream_cells_mapƒ£ENV¢GR‘Ù$e2d1cb38-2698-11eb-2e59-632faa201d6f°GR.js.init_plutoÙ$4b5f800a-2699-11eb-2528-b5917c0461cf„´precedence_heuristic§cell_idÙ$4b5f800a-2699-11eb-2528-b5917c0461cf´downstream_cells_map„ªncountries‘Ù$75ad9770-2699-11eb-0db7-5948da39d6e1¤data‘Ù$75ad9770-2699-11eb-0db7-5948da39d6e1¥ndays“Ù$75ad9770-2699-11eb-0db7-5948da39d6e1Ù$86c70334-2699-11eb-1b52-cfa50b314e2bÙ$918f640a-2699-11eb-02d8-998ed76c614a¥ncols²upstream_cells_mapƒ§readdlm¡-¤sizeÙ$918f640a-2699-11eb-02d8-998ed76c614a„´precedence_heuristic§cell_idÙ$918f640a-2699-11eb-02d8-998ed76c614a´downstream_cells_map€²upstream_cells_map†©countries‘Ù$1c4aec86-269a-11eb-2204-098352e8267c£day‘Ù$86c70334-2699-11eb-1b52-cfa50b314e2b©confirmed‘Ù$86c70334-2699-11eb-1b52-cfa50b314e2b¤plot¡+¥ndays‘Ù$4b5f800a-2699-11eb-2528-b5917c0461cfÙ$1c4aec86-269a-11eb-2204-098352e8267c„´precedence_heuristic§cell_idÙ$1c4aec86-269a-11eb-2204-098352e8267c´downstream_cells_map©countries“Ù$75ad9770-2699-11eb-0db7-5948da39d6e1Ù$86c70334-2699-11eb-1b52-cfa50b314e2bÙ$918f640a-2699-11eb-02d8-998ed76c614a²upstream_cells_mapˆ¤Core¤Base«PlutoRunner°PlutoRunner.Bond¯Core.applicable¥@bind¨Base.get«MultiSelectÙ$75ad9770-2699-11eb-0db7-5948da39d6e1„´precedence_heuristic§cell_idÙ$75ad9770-2699-11eb-0db7-5948da39d6e1´downstream_cells_mapªcummulated‘Ù$86c70334-2699-11eb-1b52-cfa50b314e2b²upstream_cells_map¤Dict¡!¤data‘Ù$4b5f800a-2699-11eb-2528-b5917c0461cf¥ndays‘Ù$4b5f800a-2699-11eb-2528-b5917c0461cf¢in¡:§collect¥zerosªncountries‘Ù$4b5f800a-2699-11eb-2528-b5917c0461cf¦haskey£end©countries‘Ù$1c4aec86-269a-11eb-2204-098352e8267c¡+Ù$49d120ea-2699-11eb-203d-fddbb33bb08b„´precedence_heuristic§cell_idÙ$49d120ea-2699-11eb-203d-fddbb33bb08b´downstream_cells_map£url²upstream_cells_map¨downloadÙ$86c70334-2699-11eb-1b52-cfa50b314e2b„´precedence_heuristic§cell_idÙ$86c70334-2699-11eb-1b52-cfa50b314e2b´downstream_cells_map‚£day‘Ù$918f640a-2699-11eb-02d8-998ed76c614a©confirmed‘Ù$918f640a-2699-11eb-02d8-998ed76c614a²upstream_cells_map‡©countries‘Ù$1c4aec86-269a-11eb-2204-098352e8267cªcummulated‘Ù$75ad9770-2699-11eb-0db7-5948da39d6e1¡:¤hcat§collect§Float64¥ndays‘Ù$4b5f800a-2699-11eb-2528-b5917c0461cfÙ$b2107723-4ff8-4d0f-84b2-4051f8ff48f5„´precedence_heuristic§cell_idÙ$b2107723-4ff8-4d0f-84b2-4051f8ff48f5´downstream_cells_map€²upstream_cells_map‚§@md_str¨getindexÙ$b3307385-fc8d-4b0c-b4d9-f77a1e2a11ca„´precedence_heuristic§cell_idÙ$b3307385-fc8d-4b0c-b4d9-f77a1e2a11ca´downstream_cells_map€²upstream_cells_map‚§@md_str¨getindex´cell_execution_order™Ù$e2d1cb38-2698-11eb-2e59-632faa201d6fÙ$b2107723-4ff8-4d0f-84b2-4051f8ff48f5Ù$49d120ea-2699-11eb-203d-fddbb33bb08bÙ$4b5f800a-2699-11eb-2528-b5917c0461cfÙ$b3307385-fc8d-4b0c-b4d9-f77a1e2a11caÙ$1c4aec86-269a-11eb-2204-098352e8267cÙ$75ad9770-2699-11eb-0db7-5948da39d6e1Ù$86c70334-2699-11eb-1b52-cfa50b314e2bÙ$918f640a-2699-11eb-02d8-998ed76c614a®process_status¥ready¤pathÙo/home/runner/work/PlutoCon2021-demos/PlutoCon2021-demos/Josef Heinen â€“ Confirmed SARSâ€“CoVâ€“2 infections.jlªcell_order™Ù$b2107723-4ff8-4d0f-84b2-4051f8ff48f5Ù$e2d1cb38-2698-11eb-2e59-632faa201d6fÙ$49d120ea-2699-11eb-203d-fddbb33bb08bÙ$4b5f800a-2699-11eb-2528-b5917c0461cfÙ$75ad9770-2699-11eb-0db7-5948da39d6e1Ù$86c70334-2699-11eb-1b52-cfa50b314e2bÙ$b3307385-fc8d-4b0c-b4d9-f77a1e2a11caÙ$1c4aec86-269a-11eb-2204-098352e8267cÙ$918f640a-2699-11eb-02d8-998ed76c614a¥nbpkg„²installed_versionsƒ¢GR¦0.57.3®DelimitedFiles¦stdlib§PlutoUI¥0.7.6§enabledÃ·restart_recommended_msgÀ´restart_required_msgÀ«cell_inputs‰Ù$e2d1cb38-2698-11eb-2e59-632faa201d6fƒ§cell_idÙ$e2d1cb38-2698-11eb-2e59-632faa201d6f¤codeÙ–begin
+    using DelimitedFiles
+	using PlutoUI
+
+	ENV["GRDISPLAY"] = "pluto" # see note above
+    using GR
+	
+    GR.js.init_pluto() # see note above
+end«code_foldedÂÙ$4b5f800a-2699-11eb-2528-b5917c0461cfƒ§cell_idÙ$4b5f800a-2699-11eb-2528-b5917c0461cf¤codeÙjbegin
+    data = readdlm("covid19.csv", ',')
+    ncountries, ncols = size(data)
+    ndays = ncols - 4
+end;«code_foldedÂÙ$918f640a-2699-11eb-02d8-998ed76c614aƒ§cell_idÙ$918f640a-2699-11eb-02d8-998ed76c614a¤codeÙÀplot(day, confirmed, xlim=(0, ndays+1), ylim=(10, 20_000_000), ylog=true,
+     title="Confirmed SARSâ€“CoVâ€“2 infections", xlabel="Day", ylabel="Confirmed",
+     labels=countries, location=4)«code_foldedÂÙ$1c4aec86-269a-11eb-2204-098352e8267cƒ§cell_idÙ$1c4aec86-269a-11eb-2204-098352e8267c¤codeÙ„@bind countries MultiSelect(["Germany", "Austria", "Belgium", "Netherlands", "France", "Italy", "Spain", "US"], default=["Germany"])«code_foldedÂÙ$75ad9770-2699-11eb-0db7-5948da39d6e1ƒ§cell_idÙ$75ad9770-2699-11eb-0db7-5948da39d6e1¤codeÙìbegin
+	cummulated = Dict()
+	for i in 1:ncountries
+		country = data[i,2]
+		if country in countries
+			if !haskey(cummulated, country) cummulated[country] = zeros(ndays) end
+			cummulated[country] .+= collect(data[i,5:end])
+		end
+	end
+end«code_foldedÂÙ$49d120ea-2699-11eb-203d-fddbb33bb08bƒ§cell_idÙ$49d120ea-2699-11eb-203d-fddbb33bb08b¤codeÙÈbegin
+	url = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv"
+	download(url, "covid19.csv")
+end;«code_foldedÂÙ$86c70334-2699-11eb-1b52-cfa50b314e2bƒ§cell_idÙ$86c70334-2699-11eb-1b52-cfa50b314e2b¤codeÙqbegin
+	day = collect(Float64, 1:ndays);
+	confirmed = hcat([cummulated[country] for country in countries]...)
+end;«code_foldedÂÙ$b2107723-4ff8-4d0f-84b2-4051f8ff48f5ƒ§cell_idÙ$b2107723-4ff8-4d0f-84b2-4051f8ff48f5¤codeÚ”md"""
+## Plotting confirmed SARSâ€“CoVâ€“2 infections
+### Author: [Josef Heinen](https://github.com/jheinen)
+
+#### Required packages: PlutoUI, GR
+
+You may have to comment out the Pluto part, if you are running the script on a remote web server. If you are running the script in a local notebook server, you will be able to pan/zoom the plot and display information when hovering over the data points.
+"""«code_foldedÂÙ$b3307385-fc8d-4b0c-b4d9-f77a1e2a11caƒ§cell_idÙ$b3307385-fc8d-4b0c-b4d9-f77a1e2a11ca¤codeÙ~md"""
+Here you can select the country you want to see.
+
+You can select multiple countries or all countries with `Cmd`+`A`.
+"""«code_foldedÂ«notebook_idÙ$ebb979ea-9924-11eb-0204-5bab992bb954¥bonds€¬cell_results‰Ù$e2d1cb38-2698-11eb-2e59-632faa201d6f†¦queuedÂ§runningÂ¦output…¤bodyÙa<script type="text/javascript" src=" https://gr-framework.org/downloads/gr-latest.js "></script>
+°persist_js_stateÂ¤mime©text/html²last_run_timestampËAØÚ†Y:¬rootassigneeÀ§cell_idÙ$e2d1cb38-2698-11eb-2e59-632faa201d6f§runtimeÎ:*Qn§erroredÂÙ$4b5f800a-2699-11eb-2528-b5917c0461cf†¦queuedÂ§runningÂ¦output…¤body °persist_js_stateÂ¤mimeªtext/plain²last_run_timestampËAØÛRn¬rootassigneeÀ§cell_idÙ$4b5f800a-2699-11eb-2528-b5917c0461cf§runtimeÎ"#8É§erroredÂÙ$918f640a-2699-11eb-02d8-998ed76c614a†¦queuedÂ§runningÂ¦output…¤bodyÚ<div id="jsterm-display-785b5b35-48f0-41fc-a92d-bd454da7a728">
 </div>
 <script type="text/javascript">
   function defer() {
@@ -25,44 +58,11 @@
     defer();
   </script>
 °persist_js_stateÂ¤mime©text/html²last_run_timestampËAØÜéÍ¬rootassigneeÀ§cell_idÙ$918f640a-2699-11eb-02d8-998ed76c614a§runtimeÏ   cÙ7§erroredÂÙ$1c4aec86-269a-11eb-2204-098352e8267c†¦queuedÂ§runningÂ¦output…¤bodyÚ}<bond def="countries"><select multiple><option value="Germany" selected>Germany</option><option value="Austria">Austria</option><option value="Belgium">Belgium</option><option value="Netherlands">Netherlands</option><option value="France">France</option><option value="Italy">Italy</option><option value="Spain">Spain</option><option value="US">US</option></select multiple></bond>°persist_js_stateÂ¤mime©text/html²last_run_timestampËAØÛ)»¬rootassigneeÀ§cell_idÙ$1c4aec86-269a-11eb-2204-098352e8267c§runtimeÎ
-T¨ñ§erroredÂ±cell_dependencies‰Ù$4b5f800a-2699-11eb-2528-b5917c0461cf„´precedence_heuristic§cell_idÙ$4b5f800a-2699-11eb-2528-b5917c0461cf´downstream_cells_map„ªncountries‘Ù$75ad9770-2699-11eb-0db7-5948da39d6e1¤data‘Ù$75ad9770-2699-11eb-0db7-5948da39d6e1¥ndays“Ù$75ad9770-2699-11eb-0db7-5948da39d6e1Ù$86c70334-2699-11eb-1b52-cfa50b314e2bÙ$918f640a-2699-11eb-02d8-998ed76c614a¥ncols²upstream_cells_mapƒ§readdlm¡-¤sizeÙ$b3307385-fc8d-4b0c-b4d9-f77a1e2a11ca„´precedence_heuristic§cell_idÙ$b3307385-fc8d-4b0c-b4d9-f77a1e2a11ca´downstream_cells_map€²upstream_cells_map‚§@md_str¨getindexÙ$75ad9770-2699-11eb-0db7-5948da39d6e1„´precedence_heuristic§cell_idÙ$75ad9770-2699-11eb-0db7-5948da39d6e1´downstream_cells_mapªcummulated‘Ù$86c70334-2699-11eb-1b52-cfa50b314e2b²upstream_cells_map¤Dict¡:¡!§collect¥zerosªncountries‘Ù$4b5f800a-2699-11eb-2528-b5917c0461cf¦haskey¥ndays‘Ù$4b5f800a-2699-11eb-2528-b5917c0461cf¤data‘Ù$4b5f800a-2699-11eb-2528-b5917c0461cf£end©countries‘Ù$1c4aec86-269a-11eb-2204-098352e8267c¡+¢inÙ$49d120ea-2699-11eb-203d-fddbb33bb08b„´precedence_heuristic§cell_idÙ$49d120ea-2699-11eb-203d-fddbb33bb08b´downstream_cells_map£url²upstream_cells_map¨downloadÙ$e2d1cb38-2698-11eb-2e59-632faa201d6f„´precedence_heuristic§cell_idÙ$e2d1cb38-2698-11eb-2e59-632faa201d6f´downstream_cells_mapƒ¢GR‘Ù$e2d1cb38-2698-11eb-2e59-632faa201d6f®DelimitedFiles§PlutoUI²upstream_cells_mapƒ£ENV¢GR‘Ù$e2d1cb38-2698-11eb-2e59-632faa201d6f°GR.js.init_plutoÙ$b2107723-4ff8-4d0f-84b2-4051f8ff48f5„´precedence_heuristic§cell_idÙ$b2107723-4ff8-4d0f-84b2-4051f8ff48f5´downstream_cells_map€²upstream_cells_map‚§@md_str¨getindexÙ$86c70334-2699-11eb-1b52-cfa50b314e2b„´precedence_heuristic§cell_idÙ$86c70334-2699-11eb-1b52-cfa50b314e2b´downstream_cells_map‚£day‘Ù$918f640a-2699-11eb-02d8-998ed76c614a©confirmed‘Ù$918f640a-2699-11eb-02d8-998ed76c614a²upstream_cells_map‡©countries‘Ù$1c4aec86-269a-11eb-2204-098352e8267cªcummulated‘Ù$75ad9770-2699-11eb-0db7-5948da39d6e1¡:¤hcat§collect§Float64¥ndays‘Ù$4b5f800a-2699-11eb-2528-b5917c0461cfÙ$918f640a-2699-11eb-02d8-998ed76c614a„´precedence_heuristic§cell_idÙ$918f640a-2699-11eb-02d8-998ed76c614a´downstream_cells_map€²upstream_cells_map†©countries‘Ù$1c4aec86-269a-11eb-2204-098352e8267c£day‘Ù$86c70334-2699-11eb-1b52-cfa50b314e2b©confirmed‘Ù$86c70334-2699-11eb-1b52-cfa50b314e2b¤plot¡+¥ndays‘Ù$4b5f800a-2699-11eb-2528-b5917c0461cfÙ$1c4aec86-269a-11eb-2204-098352e8267c„´precedence_heuristic§cell_idÙ$1c4aec86-269a-11eb-2204-098352e8267c´downstream_cells_map©countries“Ù$75ad9770-2699-11eb-0db7-5948da39d6e1Ù$86c70334-2699-11eb-1b52-cfa50b314e2bÙ$918f640a-2699-11eb-02d8-998ed76c614a²upstream_cells_mapˆ¤Core¤Base«PlutoRunner°PlutoRunner.Bond¯Core.applicable¥@bind¨Base.get«MultiSelect´cell_execution_order™Ù$e2d1cb38-2698-11eb-2e59-632faa201d6fÙ$b2107723-4ff8-4d0f-84b2-4051f8ff48f5Ù$49d120ea-2699-11eb-203d-fddbb33bb08bÙ$4b5f800a-2699-11eb-2528-b5917c0461cfÙ$b3307385-fc8d-4b0c-b4d9-f77a1e2a11caÙ$1c4aec86-269a-11eb-2204-098352e8267cÙ$75ad9770-2699-11eb-0db7-5948da39d6e1Ù$86c70334-2699-11eb-1b52-cfa50b314e2bÙ$918f640a-2699-11eb-02d8-998ed76c614a©shortpathÙ7Josef Heinen â€“ Confirmed SARSâ€“CoVâ€“2 infections.jl®process_status¥ready¤pathÙo/home/runner/work/PlutoCon2021-demos/PlutoCon2021-demos/Josef Heinen â€“ Confirmed SARSâ€“CoVâ€“2 infections.jlªcell_order™Ù$b2107723-4ff8-4d0f-84b2-4051f8ff48f5Ù$e2d1cb38-2698-11eb-2e59-632faa201d6fÙ$49d120ea-2699-11eb-203d-fddbb33bb08bÙ$4b5f800a-2699-11eb-2528-b5917c0461cfÙ$75ad9770-2699-11eb-0db7-5948da39d6e1Ù$86c70334-2699-11eb-1b52-cfa50b314e2bÙ$b3307385-fc8d-4b0c-b4d9-f77a1e2a11caÙ$1c4aec86-269a-11eb-2204-098352e8267cÙ$918f640a-2699-11eb-02d8-998ed76c614a¥nbpkg„²installed_versionsƒ¢GR¦0.57.3®DelimitedFiles¦stdlib§PlutoUI¥0.7.6§enabledÃ·restart_recommended_msgÀ´restart_required_msgÀ«cell_inputs‰Ù$4b5f800a-2699-11eb-2528-b5917c0461cfƒ§cell_idÙ$4b5f800a-2699-11eb-2528-b5917c0461cf¤codeÙjbegin
-    data = readdlm("covid19.csv", ',')
-    ncountries, ncols = size(data)
-    ndays = ncols - 4
-end;«code_foldedÂÙ$b3307385-fc8d-4b0c-b4d9-f77a1e2a11caƒ§cell_idÙ$b3307385-fc8d-4b0c-b4d9-f77a1e2a11ca¤codeÙ~md"""
-Here you can select the country you want to see.
-
-You can select multiple countries or all countries with `Cmd`+`A`.
-"""«code_foldedÂÙ$75ad9770-2699-11eb-0db7-5948da39d6e1ƒ§cell_idÙ$75ad9770-2699-11eb-0db7-5948da39d6e1¤codeÙìbegin
-	cummulated = Dict()
-	for i in 1:ncountries
-		country = data[i,2]
-		if country in countries
-			if !haskey(cummulated, country) cummulated[country] = zeros(ndays) end
-			cummulated[country] .+= collect(data[i,5:end])
-		end
-	end
-end«code_foldedÂÙ$49d120ea-2699-11eb-203d-fddbb33bb08bƒ§cell_idÙ$49d120ea-2699-11eb-203d-fddbb33bb08b¤codeÙÈbegin
-	url = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv"
-	download(url, "covid19.csv")
-end;«code_foldedÂÙ$e2d1cb38-2698-11eb-2e59-632faa201d6fƒ§cell_idÙ$e2d1cb38-2698-11eb-2e59-632faa201d6f¤codeÙ–begin
-    using DelimitedFiles
-	using PlutoUI
-
-	ENV["GRDISPLAY"] = "pluto" # see note above
-    using GR
-	
-    GR.js.init_pluto() # see note above
-end«code_foldedÂÙ$b2107723-4ff8-4d0f-84b2-4051f8ff48f5ƒ§cell_idÙ$b2107723-4ff8-4d0f-84b2-4051f8ff48f5¤codeÚ”md"""
-## Plotting confirmed SARSâ€“CoVâ€“2 infections
-### Author: [Josef Heinen](https://github.com/jheinen)
-
-#### Required packages: PlutoUI, GR
-
-You may have to comment out the Pluto part, if you are running the script on a remote web server. If you are running the script in a local notebook server, you will be able to pan/zoom the plot and display information when hovering over the data points.
-"""«code_foldedÂÙ$86c70334-2699-11eb-1b52-cfa50b314e2bƒ§cell_idÙ$86c70334-2699-11eb-1b52-cfa50b314e2b¤codeÙqbegin
-	day = collect(Float64, 1:ndays);
-	confirmed = hcat([cummulated[country] for country in countries]...)
-end;«code_foldedÂÙ$918f640a-2699-11eb-02d8-998ed76c614aƒ§cell_idÙ$918f640a-2699-11eb-02d8-998ed76c614a¤codeÙÀplot(day, confirmed, xlim=(0, ndays+1), ylim=(10, 20_000_000), ylog=true,
-     title="Confirmed SARSâ€“CoVâ€“2 infections", xlabel="Day", ylabel="Confirmed",
-     labels=countries, location=4)«code_foldedÂÙ$1c4aec86-269a-11eb-2204-098352e8267cƒ§cell_idÙ$1c4aec86-269a-11eb-2204-098352e8267c¤codeÙ„@bind countries MultiSelect(["Germany", "Austria", "Belgium", "Netherlands", "France", "Italy", "Spain", "US"], default=["Germany"])«code_foldedÂ«notebook_idÙ$ebb979ea-9924-11eb-0204-5bab992bb954«in_temp_dirÂ
+T¨ñ§erroredÂÙ$75ad9770-2699-11eb-0db7-5948da39d6e1†¦queuedÂ§runningÂ¦output…¤body °persist_js_stateÂ¤mimeªtext/plain²last_run_timestampËAØÛM7µ¬rootassigneeÀ§cell_idÙ$75ad9770-2699-11eb-0db7-5948da39d6e1§runtimeÎ,©§erroredÂÙ$49d120ea-2699-11eb-203d-fddbb33bb08b†¦queuedÂ§runningÂ¦output…¤body °persist_js_stateÂ¤mimeªtext/plain²last_run_timestampËAØÚÍ1¥¬rootassigneeÀ§cell_idÙ$49d120ea-2699-11eb-203d-fddbb33bb08b§runtimeÎ¾ı²§erroredÂÙ$86c70334-2699-11eb-1b52-cfa50b314e2b†¦queuedÂ§runningÂ¦output…¤body °persist_js_stateÂ¤mimeªtext/plain²last_run_timestampËAØÛh)¦¬rootassigneeÀ§cell_idÙ$86c70334-2699-11eb-1b52-cfa50b314e2b§runtimeÎ
+>–§erroredÂÙ$b2107723-4ff8-4d0f-84b2-4051f8ff48f5†¦queuedÂ§runningÂ¦output…¤bodyÚÆ<div class="markdown"><h2>Plotting confirmed SARSâ€“CoVâ€“2 infections</h2>
+<h3>Author: <a href="https://github.com/jheinen">Josef Heinen</a></h3>
+<h4>Required packages: PlutoUI, GR</h4>
+<p>You may have to comment out the Pluto part, if you are running the script on a remote web server. If you are running the script in a local notebook server, you will be able to pan/zoom the plot and display information when hovering over the data points.</p>
+</div>°persist_js_stateÂ¤mime©text/html²last_run_timestampËAØ×„Ôx¬rootassigneeÀ§cell_idÙ$b2107723-4ff8-4d0f-84b2-4051f8ff48f5§runtimeÍ18§erroredÂÙ$b3307385-fc8d-4b0c-b4d9-f77a1e2a11ca†¦queuedÂ§runningÂ¦output…¤bodyÙ¸<div class="markdown"><p>Here you can select the country you want to see.</p>
+<p>You can select multiple countries or all countries with <code>Cmd</code>&#43;<code>A</code>.</p>
+</div>°persist_js_stateÂ¤mime©text/html²last_run_timestampËAØ×„â¬rootassigneeÀ§cell_idÙ$b3307385-fc8d-4b0c-b4d9-f77a1e2a11ca§runtimeÍ§erroredÂ©shortpathÙ7Josef Heinen â€“ Confirmed SARSâ€“CoVâ€“2 infections.jl«in_temp_dirÂ

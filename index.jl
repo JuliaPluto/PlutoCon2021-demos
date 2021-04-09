@@ -59,6 +59,8 @@ overflow-x: hidden;
 # ╔═╡ c6e22e1b-759f-4eca-b3c6-2d16b133c79d
 md"""
 Welcome to the PlutoCon demo page! The notebooks on this site were submitted by Pluto users, and you can view them in your browser. Just like the website [computationalthinking.mit.edu](computationalthinking.mit.edu), we will use our [fancy new technology](https://github.com/JuliaPluto/PlutoSliderServer.jl) to run sliders, button, webcam inputs, etc. directly on the website.
+
+The hardware all this runs on is kindly sponsored by JuliaHub - [see their PlutoCon talk](https://www.youtube.com/watch?v=uxDJcFRdELM)!
 """
 
 # ╔═╡ 97cb9fe9-93b7-4380-84ab-4ea339c2cbca
@@ -71,7 +73,66 @@ md"""
 """
 
 # ╔═╡ 03869e11-5785-4b05-b830-64e25aa66dc6
+html"""
+<style>
 
+.juliahub-banner::before{
+  content: 'deployment kindly sponsored by';
+  font-size: 1rem;
+  font-style: italic;
+  line-height: 1;
+  text-align: middle;
+  margin-bottom: 1rem;
+  color: white;
+}
+
+.juliahub-banner img {
+  width: 140px;
+}
+.juliahub-banner {
+  display: flex;
+  flex-flow: column nowrap;
+  position: fixed;
+  left: -2px; 
+  bottom: 1rem;
+  background-color: #2a2e48;
+  border-radius:  0 4px 4px 0;
+  padding: .5em;
+  animation-duration: 20s;
+  animation-name: slidein;
+  animation-iteration-count: infinite;
+  cursor: pointer;
+  z-index: 10;
+}
+
+@keyframes slidein {
+  from {
+    transform: translateX(-100%);
+  }
+  5% {
+    transform: translateX(-100%);
+  }
+  15% {
+    transform: translateX(0%);
+  }
+  50% {
+    transform: translateX(0%);
+  }
+  55% {
+	transform: translateX(-100%);
+  }
+  to {
+	transform: translateX(-100%);
+  }
+
+
+}
+</style>
+<div class="juliahub-banner">
+        <a href="https://www.youtube.com/watch?v=uxDJcFRdELM" title="Pluto on JuliaHub | Matt Bauman | PlutoCon 2021">
+          <img src="https://cdn.glitch.com/bb7f58d5-622f-4675-a1dc-17655d5ae32f%2FJuliaHub-Logo.svg?v=1617972152320" alt="sponsored by JuliaHub!"/>
+        </a>
+</div>"""
 
 # ╔═╡ 92fa5931-5ac5-4358-a141-210f73806925
 md"""
