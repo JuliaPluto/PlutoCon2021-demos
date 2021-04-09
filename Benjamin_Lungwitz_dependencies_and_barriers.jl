@@ -57,7 +57,7 @@ md"""
 
 # ╔═╡ 3fde6b14-bc4d-4c38-86d7-a5d0cba738df
 md"""
-From Pluto V0.14.1 on, all information about cell dependencies and cell execution order is available in the frontend!
+From Pluto V0.14.1 on, all information about cell dependencies and cell execution order is available in the frontend, both from within Pluto JS frontend code and JS code in Pluto cells.
 
 However, there no GUI implemented yet to show this - maybe you want to help?
 """
@@ -65,6 +65,10 @@ However, there no GUI implemented yet to show this - maybe you want to help?
 # ╔═╡ 5c8267dd-8ab9-4ad1-8076-93634b6677f0
 md"""
 ### Get Dependencies in the Frontend
+
+It is now possible to get cell dependency information in JS code directly in Pluto cells!
+
+Note: the following functionality is still experimental and the API may change in the future.
 
 Open Development Tools (in Chrome *Ctrl + Shift + I*).
 """
@@ -111,7 +115,7 @@ md"""
 md"""
 OK - fetching the cell depenency data with JS code in Pluto cells is kind of meh - we want to have a visualization in Pluto itself!
 
-Good news: everything required for it is available in the frontend now!
+Good news: everything required for it is available in the Pluto frontend now!
 
 Bad news: someone has to come up with a design and implement it - could this be you?
 """
@@ -119,6 +123,13 @@ Bad news: someone has to come up with a design and implement it - could this be 
 # ╔═╡ feba67f6-88fd-407d-860b-46ac736a8b0b
 md"""
 Demo: (very ugly) mock-GUI for dependency visualization (File `frontend\components\Cell.js`).
+"""
+
+# ╔═╡ d6f2eb66-b6b2-4257-ab6b-2b60b8f6ed36
+md"""
+Are you interested in supporting us here? 
+
+Please let us know, e.g. on [Zulip](https://julialang.zulipchat.com/#narrow/stream/257776-Pluto.2Ejl-development) or [GitHub](https://github.com/fonsp/Pluto.jl)!
 """
 
 # ╔═╡ f902247e-a892-4a09-bc17-f17901d47b05
@@ -313,6 +324,7 @@ document.getElementById("dependencies").innerHTML = text;
 # ╟─024670c6-e7b6-4379-b042-34225d673b8a
 # ╟─f27d5626-0d1a-4e39-8fa2-8c873038b94b
 # ╟─feba67f6-88fd-407d-860b-46ac736a8b0b
+# ╟─d6f2eb66-b6b2-4257-ab6b-2b60b8f6ed36
 # ╟─f902247e-a892-4a09-bc17-f17901d47b05
 # ╟─c7a7d526-f8a0-48a8-854e-56b116c40f41
 # ╟─b8ec2f3c-71be-4cf9-876f-5c3116d1f03b
