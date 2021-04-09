@@ -4,9 +4,14 @@
 using Markdown
 using InteractiveUtils
 
+# ╔═╡ d854264f-e40f-49cb-9a65-46ba7435e7ca
+using PlutoUI
+
 # ╔═╡ da13b180-97c4-11eb-257c-358495df9420
 md"""
 # Cell Dependencies and Execution Barriers
+
+This notebook requires the Pluto version from [Pull Request #985](https://github.com/fonsp/Pluto.jl/pull/985)
 """
 
 # ╔═╡ a54f1f83-60ad-411f-aa52-bbe4116e3b8d
@@ -57,6 +62,13 @@ From Pluto V0.14.1 on, all information about cell dependencies and cell executio
 However, there no GUI implemented yet to show this - maybe you want to help?
 """
 
+# ╔═╡ 5c8267dd-8ab9-4ad1-8076-93634b6677f0
+md"""
+### Get Dependencies in the Frontend
+
+Open Development Tools (in Chrome *Ctrl + Shift + I*).
+"""
+
 # ╔═╡ cb191d2b-5f8c-450d-a78e-65ccfe1f2e17
 md"""
 **Execution order of cells** - this corresponds to the order the cells are saved in the `notebook.jl` file (not the order shown in Pluto).
@@ -88,6 +100,142 @@ console.log(editor_state.notebook.cell_dependencies)
 # ╔═╡ 0335c8bc-fe4e-434d-b693-b5b3c66e2a5a
 md"""
 ### Cell Dependencies as UML Diagram
+"""
+
+# ╔═╡ 024670c6-e7b6-4379-b042-34225d673b8a
+md"""
+### Cell Dependencies in Pluto Frontend
+"""
+
+# ╔═╡ f27d5626-0d1a-4e39-8fa2-8c873038b94b
+md"""
+OK - fetching the cell depenency data with JS code in Pluto cells is kind of meh - we want to have a visualization in Pluto itself!
+
+Good news: everything required for it is available in the frontend now!
+
+Bad news: someone has to come up with a design and implement it - could this be you?
+"""
+
+# ╔═╡ feba67f6-88fd-407d-860b-46ac736a8b0b
+md"""
+Demo: (very ugly) mock-GUI for dependency visualization (File `frontend\components\Cell.js`).
+"""
+
+# ╔═╡ f902247e-a892-4a09-bc17-f17901d47b05
+md"""
+## Execution Barrier (WIP)
+
+Note: the following only works when using Pluto with this 
+[Draft Pull Request](https://github.com/fonsp/Pluto.jl/pull/985)
+"""
+
+# ╔═╡ c7a7d526-f8a0-48a8-854e-56b116c40f41
+md"""
+### Use Cases
+
+* give a method to prevent auto-update of cells which take too long to compute to keep the notebook reactive and/or save computational resources.
+
+* step-by-step computations for educational purposes
+
+
+"""
+
+# ╔═╡ b8ec2f3c-71be-4cf9-876f-5c3116d1f03b
+md"""
+### Approach
+
+1. The execution barrier can be activated or deactivated by right-click on the run button  below the Pluto cell.
+
+2. The cell(s) with execution barriers are not executed, as well as any other cell depending on the output (directly or indirectly) of a deactivated cell. This is graphically shown in Pluto.
+
+3. If a barrier is deactivated, the corresponding cell and all its downstream dependencies are automatically re-executed.
+
+4. The execution barrier information is saved inside the `notebook.jl` file for persistence. This is done in a backward compatible way - if the Pluto version does not support execution barriers, they are shown as comments in the cells.
+
+
+
+"""
+
+# ╔═╡ 21f710f2-8c3b-43fd-81c8-0c0ad9943236
+md"""
+# Demo
+"""
+
+# ╔═╡ 579f5cb3-00c8-4d9e-aea2-e0724525a493
+x = 10
+
+# ╔═╡ 2a599d22-0457-44ac-bd19-acba77322176
+y = begin
+	sleep(2)
+	2x
+end
+
+# ╔═╡ 0ddad8dc-603a-43ab-aebf-57862643d23d
+z = sqrt(y)
+
+# ╔═╡ fa91974d-9f4c-4c65-95c2-d01f52cad465
+y^2
+
+# ╔═╡ 28772ce7-de33-41cf-9eff-b32838bf3aaf
+a = 3x
+
+# ╔═╡ f08bc1e7-4229-466f-b1ba-a5df0333eb47
+z^3
+
+# ╔═╡ 94971c75-cf66-46a6-a64d-74c1901ce0bd
+u = begin
+	sleep(1.5)
+	4y
+end
+
+# ╔═╡ 56124d79-b192-40dc-b6ba-a7e13b0a1764
+md"""
+# Appendix
+"""
+
+# ╔═╡ cd4b8b07-99d4-4652-8141-f5dfd86c40aa
+TableOfContents()
+
+# ╔═╡ b8821d93-4b0f-4575-a461-f0f20935869b
+md"""
+[https://github.com/fonsp/PlutoUI.jl/pull/80](https://github.com/fonsp/PlutoUI.jl/pull/80)
+"""
+
+# ╔═╡ b5de0179-a1c6-409a-bfc5-5e2ca100641e
+begin
+	struct UML
+		code:: String
+	end
+	function Base.show(io::IO, ::MIME"text/html", uml::UML)
+		print(io, """
+		<!DOCTYPE html>
+		<body>
+			<div class="mermaid">
+				$(uml.code)
+			</div>
+			<script src="https://cdn.jsdelivr.net/npm/mermaid@8.9.1/dist/mermaid.min.js"></script>
+			<script>mermaid.initialize({startOnLoad:true});</script>
+		</body>
+		</html>
+		""")
+	end
+end
+
+# ╔═╡ 6581764c-2f28-49b3-803a-1008c7143cbb
+UML("""graph LR
+579f5 -- x --> 2a599
+579f5 -- x --> 28772
+2a599 -- y --> 0ddad
+2a599 -- y --> fa919
+2a599 -- y --> 94971
+0ddad -- z --> f08bc
+b5de0 -- UML --> 65817
+b5de0 -- UML --> 467f8
+	""")
+
+# ╔═╡ 384cfb77-5512-4c86-ba4f-f1adca727bf0
+md"""
+Fetching cell dependency data for UML diagram
 """
 
 # ╔═╡ e63de887-1b7b-45b0-8b8c-a2006d4608b4
@@ -147,110 +295,6 @@ for (i = 0; i < editor_state.notebook.cell_execution_order.length; i++) {
 document.getElementById("dependencies").innerHTML = text;
 </script>""" |> HTML
 
-# ╔═╡ f902247e-a892-4a09-bc17-f17901d47b05
-md"""
-## Execution Barrier (WIP)
-
-Note: the following only works when using Pluto with this 
-[Draft Pull Request](https://github.com/fonsp/Pluto.jl/pull/985)
-"""
-
-# ╔═╡ c7a7d526-f8a0-48a8-854e-56b116c40f41
-md"""
-### Use Cases:
-
-* give a method to prevent auto-update of cells which take too long to compute to keep the notebook reactive and/or save computational resources.
-
-* step-by-step computations for educational purposes
-
-
-"""
-
-# ╔═╡ b8ec2f3c-71be-4cf9-876f-5c3116d1f03b
-md"""
-### Approach:
-
-1. The execution barrier can be activated or deactivated by right-click on the run button  below the Pluto cell.
-
-2. The cell(s) with execution barriers are not executed, as well as any other cell depending on the output (directly or indirectly) of a deactivated cell. This is graphically shown in Pluto.
-
-3. If a barrier is deactivated, the corresponding cell and all its downstream dependencies are automatically re-executed.
-
-4. The execution barrier information is saved inside the `notebook.jl` file for persistence. This is done in a backward compatible way - if the Pluto version does not support execution barriers, they are shown as comments in the cells.
-
-
-
-"""
-
-# ╔═╡ 21f710f2-8c3b-43fd-81c8-0c0ad9943236
-md"""
-## Demo
-"""
-
-# ╔═╡ 579f5cb3-00c8-4d9e-aea2-e0724525a493
-x = 10
-
-# ╔═╡ 2a599d22-0457-44ac-bd19-acba77322176
-y = begin
-	sleep(2)
-	2x
-end
-
-# ╔═╡ 0ddad8dc-603a-43ab-aebf-57862643d23d
-z = sqrt(y)
-
-# ╔═╡ fa91974d-9f4c-4c65-95c2-d01f52cad465
-y^2
-
-# ╔═╡ 28772ce7-de33-41cf-9eff-b32838bf3aaf
-a = 3x
-
-# ╔═╡ f08bc1e7-4229-466f-b1ba-a5df0333eb47
-z^3
-
-# ╔═╡ 94971c75-cf66-46a6-a64d-74c1901ce0bd
-u = begin
-	sleep(1.5)
-	4y
-end
-
-# ╔═╡ 56124d79-b192-40dc-b6ba-a7e13b0a1764
-md"""
-# Appendix
-"""
-
-# ╔═╡ b5de0179-a1c6-409a-bfc5-5e2ca100641e
-begin
-	struct UML
-		code:: String
-	end
-	function Base.show(io::IO, ::MIME"text/html", uml::UML)
-		print(io, """
-		<!DOCTYPE html>
-		<body>
-			<div class="mermaid">
-				$(uml.code)
-			</div>
-			<script src="https://cdn.jsdelivr.net/npm/mermaid@8.9.1/dist/mermaid.min.js"></script>
-			<script>mermaid.initialize({startOnLoad:true});</script>
-		</body>
-		</html>
-		""")
-	end
-end
-
-# ╔═╡ 6581764c-2f28-49b3-803a-1008c7143cbb
-UML("""graph LR
-579f5 -- x --> 2a599
-579f5 -- x --> 28772
-2a599 -- y --> 0ddad
-2a599 -- y --> fa919
-2a599 -- y --> 94971
-0ddad -- z --> f08bc
-b5de0 -- UML --> 65817
-b5de0 -- UML --> 467f8
-	""")
-
 # ╔═╡ Cell order:
 # ╟─da13b180-97c4-11eb-257c-358495df9420
 # ╟─a54f1f83-60ad-411f-aa52-bbe4116e3b8d
@@ -259,13 +303,16 @@ b5de0 -- UML --> 467f8
 # ╟─056613b1-fc66-439f-a333-f86c9735535d
 # ╟─a866c509-3c98-41a5-bc4a-1ba6c97ae0e6
 # ╟─3fde6b14-bc4d-4c38-86d7-a5d0cba738df
+# ╟─5c8267dd-8ab9-4ad1-8076-93634b6677f0
 # ╟─cb191d2b-5f8c-450d-a78e-65ccfe1f2e17
 # ╠═b4d39d30-b7aa-4218-acc2-7a588cfeabba
 # ╟─4901d093-6d13-4775-8a8c-c077971d314d
 # ╠═62e3d2c4-3363-4937-aa52-406d134be32b
 # ╟─0335c8bc-fe4e-434d-b693-b5b3c66e2a5a
-# ╟─e63de887-1b7b-45b0-8b8c-a2006d4608b4
 # ╟─6581764c-2f28-49b3-803a-1008c7143cbb
+# ╟─024670c6-e7b6-4379-b042-34225d673b8a
+# ╟─f27d5626-0d1a-4e39-8fa2-8c873038b94b
+# ╟─feba67f6-88fd-407d-860b-46ac736a8b0b
 # ╟─f902247e-a892-4a09-bc17-f17901d47b05
 # ╟─c7a7d526-f8a0-48a8-854e-56b116c40f41
 # ╟─b8ec2f3c-71be-4cf9-876f-5c3116d1f03b
@@ -278,4 +325,9 @@ b5de0 -- UML --> 467f8
 # ╠═f08bc1e7-4229-466f-b1ba-a5df0333eb47
 # ╠═94971c75-cf66-46a6-a64d-74c1901ce0bd
 # ╟─56124d79-b192-40dc-b6ba-a7e13b0a1764
+# ╠═d854264f-e40f-49cb-9a65-46ba7435e7ca
+# ╠═cd4b8b07-99d4-4652-8141-f5dfd86c40aa
+# ╟─b8821d93-4b0f-4575-a461-f0f20935869b
 # ╠═b5de0179-a1c6-409a-bfc5-5e2ca100641e
+# ╟─384cfb77-5512-4c86-ba4f-f1adca727bf0
+# ╟─e63de887-1b7b-45b0-8b8c-a2006d4608b4
