@@ -7,6 +7,7 @@ ignore_cache = [
 
 [Precompute]
 enabled = true
+max_filesize_per_group = 20000000 # 20 MB
 
 # the following notebooks are disabled because they are not working well. of course i want to fix this, but i will only have time after the conference... sorry!
 [SliderServer]
