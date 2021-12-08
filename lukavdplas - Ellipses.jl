@@ -14,17 +14,7 @@ macro bind(def, element)
 end
 
 # ╔═╡ 41038420-032c-11eb-3351-d3b98b982502
-begin
-	import Pkg
-	
-	Pkg.activate(mktempdir())
-	
-	Pkg.add([
-        Pkg.PackageSpec(name="Plots")
-    ])
-	
-	using Plots
-end
+using Plots, PlutoUI, HypertextLiteral
 
 # ╔═╡ 51f23aae-0946-11eb-1bab-93dcbc98f564
 md"""
@@ -169,16 +159,16 @@ Here are some options for your plot:
 """
 
 # ╔═╡ f5cc3c80-094e-11eb-2cfc-478093f5e915
-@bind give_absolute html"<input type=checkbox checked=checked> Give absolute value of error <br> <i>Turn all errors into postive values</i>"
+@htl("""$(@bind give_absolute CheckBox(true)) Give absolute value of error <br> <i>Turn all errors into postive values</i>""")
 
 # ╔═╡ 5403bd12-0951-11eb-2eb2-d1b0a703e319
-@bind give_relative html"""<input type=checkbox checked=checked> Give error relative to circumference <br> <i>Divide the error by the circumference. Note that you will probably need to adjust the scale as well.</i>"""
+@ht_("""$(@bind give_relative CheckBox(true)) Give error relative to circumference <br> <i>Divide the error by the circumference. Note that you will probably need to adjust the scale as well.</i>""")
 
 # ╔═╡ 56320014-094f-11eb-1642-37841339e58d
 md"""
 Maximum error:
 
-$(@bind log_max_error html"<input type=range min=-4 max=1 value=-1 step=0.1>")
+$(@bind log_max_error Slider(-4:.1:1; default=1))
 
 *What should be the limit on the y axis?*
 """
@@ -187,7 +177,7 @@ $(@bind log_max_error html"<input type=range min=-4 max=1 value=-1 step=0.1>")
 md"""
 Maximum $\frac{a}{b}$ ratio:
 
-$(@bind max_ratio html"<input type=range min=2 max=20 value=5>")
+$(@bind max_ratio Slider(2:20; default=5))
 
 *What should be the limit on the x-axis?*
 """
@@ -196,7 +186,7 @@ $(@bind max_ratio html"<input type=range min=2 max=20 value=5>")
 md"""
 Number of data points:
 
-$(@bind sample_size html"<input type=range min=5 max=300 value=100>")
+$(@bind sample_size Slider(5:300; default=100))
 
 *Slide up if you want more precision in the plot, slide down if you want to speed up calculations.*
 """
