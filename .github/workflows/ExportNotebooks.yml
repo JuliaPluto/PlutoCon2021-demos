@@ -36,7 +36,6 @@ jobs:
 
                   PlutoSliderServer.export_directory(; 
                     Export_cache_dir="pluto_state_cache",
-                    Precompute_enabled=true,
                   );'
             - name: Deploy to gh-pages
               uses: JamesIves/github-pages-deploy-action@releases/v3

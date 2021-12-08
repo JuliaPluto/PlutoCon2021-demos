@@ -1,11 +1,12 @@
 [Export]
 baked_state = false
 offer_binder = true
-binder_url = "https://mybinder.org/build/gh/fonsp/pluto-on-binder/8345c9238da98fe56f3d0ee20200314769a7d893/"
-slider_server_url = "https://plutocon2021-demos-sliderserver.plutojl.org/"
 ignore_cache = [
     "index.jl",
 ]
+
+[Precompute]
+enabled = true
 
 # the following notebooks are disabled because they are not working well. of course i want to fix this, but i will only have time after the conference... sorry!
 [SliderServer]
