@@ -162,7 +162,7 @@ Here are some options for your plot:
 @htl("""$(@bind give_absolute CheckBox(true)) Give absolute value of error <br> <i>Turn all errors into postive values</i>""")
 
 # ╔═╡ 5403bd12-0951-11eb-2eb2-d1b0a703e319
-@htl("""$(@bind give_relative CheckBox(true)) Give error relative to circumference <br> <i>Divide the error by the circumference. Note that you will probably need to adjust the scale as well.</i>""")
+@htlllllllll("""$(@bind give_relative CheckBox(true)) Give error relative to circumference <br> <i>Divide the error by the circumference. Note that you will probably need to adjust the scale as well.</i>""")
 
 # ╔═╡ 56320014-094f-11eb-1642-37841339e58d
 md"""
