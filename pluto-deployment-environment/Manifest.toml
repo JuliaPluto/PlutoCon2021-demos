@@ -338,8 +338,8 @@ version = "0.17.3"
 
 [[deps.PlutoSliderServer]]
 deps = ["Base64", "BetterFileWatching", "Configurations", "Distributed", "Distributions", "FromFile", "Git", "GitHubActions", "HTTP", "Logging", "Markdown", "OrderedCollections", "Pkg", "Pluto", "Random", "SHA", "Sockets", "Statistics", "TOML", "TerminalLoggers", "UUIDs"]
-git-tree-sha1 = "73223c4a21c1fa5ebc616e444a5fb38ee7235abc"
-repo-rev = "5b853e0"
+git-tree-sha1 = "f91feea0af3565dd48e458c66153b3007298e66c"
+repo-rev = "d96ace4"
 repo-url = "https://github.com/JuliaPluto/PlutoSliderServer.jl.git"
 uuid = "2fc8631c-6f24-4c5b-bca7-cbb509c42db4"
 version = "0.3.2"
