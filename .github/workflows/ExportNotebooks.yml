@@ -2,7 +2,7 @@ name: Export Pluto notebooks
 on:
     push:
         branches:
-            - main
+            - test-precomputed-slider-server
     workflow_dispatch:
 
 jobs:
@@ -15,29 +15,32 @@ jobs:
             - name: Set up notebook state cache
               uses: actions/cache@v2
               with:
-                path: pluto_state_cache
-                key: ${{ runner.os }}-pluto_state_cache-v2-${{ hashFiles('**/Project.toml', '**/Manifest.toml') }}-${{ hashFiles('**/*.jl') }}
-                restore-keys: |
-                    ${{ runner.os }}-pluto_state_cache-v2-${{ hashFiles('**/Project.toml', '**/Manifest.toml') }}
+                  path: pluto_state_cache
+                  key: ${{ runner.os }}-pluto_state_cache-v2-${{ hashFiles('**/Project.toml', '**/Manifest.toml') }}-${{ hashFiles('**/*.jl') }}
+                  restore-keys: |
+                      ${{ runner.os }}-pluto_state_cache-v2-${{ hashFiles('**/Project.toml', '**/Manifest.toml') }}
 
             - name: Install Julia
               uses: julia-actions/setup-julia@v1
               with:
-                  version: 1.6.0-rc3
+                  version: 1.7
 
             - name: Run Pluto notebooks
-              run: julia --project=pluto-deployment-environment -e '
+              run: |
+                  julia --project=pluto-deployment-environment -e '
                   import Pkg;
+
                   Pkg.instantiate();
 
                   import PlutoSliderServer;
 
-                  PlutoSliderServer.github_action(; 
+                  PlutoSliderServer.export_directory(; 
                     Export_cache_dir="pluto_state_cache",
+                    Precompute_enabled=true,
                   );'
             - name: Deploy to gh-pages
               uses: JamesIves/github-pages-deploy-action@releases/v3
               with:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-                  BRANCH: gh-pages
+                  BRANCH: gh-pages-test-precomputed-slider-server
                   FOLDER: .
