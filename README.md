@@ -1,3 +1,5 @@
+# Interested in generating HTML exports of Pluto notebook automatically? Try our [template repository](https://github.com/JuliaPluto/static-export-template)!
+
 <center><img src="https://user-images.githubusercontent.com/6933510/110158714-0125b600-7dea-11eb-82ec-a04a0856204e.png" width=50%></center>
 
 # [PlutoCon2021](https://plutojl.org/plutocon2021) demos
